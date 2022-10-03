@@ -1,0 +1,21 @@
+{
+  "assignedDay": "2022-09-01",
+  "meals": [],
+  "food": [
+    {
+      "dateTime": "2022-09-01T17:32:28",
+      "gram": 73,
+      "food": {
+        "name": "essen1",
+        "brands": "marke",
+        "nutriments": {
+          "calories": 43,
+          "carbohydrates": 5.88,
+          "proteins": 3.1,
+          "fat": 1.5,
+          "fiber": 1.2
+        }
+      }
+    }
+  ]
+}

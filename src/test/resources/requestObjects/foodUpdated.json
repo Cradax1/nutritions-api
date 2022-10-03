@@ -1,0 +1,11 @@
+{
+  "name": "essen1",
+  "brands": "marke2",
+  "nutriments": {
+    "calories": 32,
+    "carbohydrates": 7.10,
+    "proteins": 9.09,
+    "fat": 4.0,
+    "fiber": 2.4
+  }
+}

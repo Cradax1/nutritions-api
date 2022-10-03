@@ -1,0 +1,11 @@
+{
+  "name": "Beeren Müsli",
+  "brands": "Rewe,Rewe Bio",
+  "nutriments": {
+    "calories": 354,
+    "carbohydrates": 62,
+    "proteins": 10,
+    "fat": 5,
+    "fiber": 10.6
+  }
+}

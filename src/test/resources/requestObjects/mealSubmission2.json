@@ -1,0 +1,13 @@
+{
+  "name": "meal2",
+  "ingredients": [
+    {
+      "name": "essen1",
+      "gram": 10
+    },
+    {
+      "name": "essen2",
+      "gram": 15
+    }
+  ]
+}

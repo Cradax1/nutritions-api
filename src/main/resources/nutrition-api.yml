@@ -1,0 +1,703 @@
+openapi: 3.0.3
+info:
+    title: Nutrition API
+    description: API to create an individual food/meal catalogue and store nutrition on a daily basis
+    version: 1.0.0
+
+servers:
+    -   url: http://localhost:8080
+        description: Optional server description
+
+tags:
+    - name: Food
+      description: Search food based on Open Food Facts
+      externalDocs:
+        description: An external provider for food facts around the world
+        url: https://world.openfoodfacts.org/
+    - name: Catalogue
+      description: User specific catalogue with food and meals
+    - name: Diary
+      description: User specific nutrition on a daily basis, refers to food and meals in the catalogue
+
+paths:
+    /food/{barcode}:
+        get:
+            summary: Get food information by the food's barcode
+            tags:
+                - Food
+            operationId: foodBarcodeGet
+            parameters:
+                -   in: path
+                    name: barcode
+                    schema:
+                        $ref: '#/components/schemas/Barcode'
+                    required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+                '502':
+                    description: External food information provider sent unexpected answer.
+    /catalogue/food/external/{barcode}:
+        get:
+            summary: Get the foods information of the individual catalogue by its barcode
+            tags:
+                - Catalogue
+            operationId: catalogueFoodExternalBarcodeGet
+            parameters:
+                -   in: path
+                    name: barcode
+                    schema:
+                        $ref: '#/components/schemas/Barcode'
+                    required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /catalogue/food/external:
+        post:
+            summary: Add a food to the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueFoodExternalPost
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExternalFoodSubmission'
+            responses:
+                '201':
+                    description: The item was created.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '409':
+                    $ref: '#/components/responses/409'
+                '500':
+                    $ref: '#/components/responses/500'
+    /catalogue/food/{name}:
+        get:
+            summary: Get the foods information of the individual catalogue by its name
+            tags:
+                - Catalogue
+            operationId: catalogueFoodNameGet
+            parameters:
+                -   in: path
+                    name: name
+                    schema:
+                        $ref: '#/components/schemas/Name'
+                    required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+        delete:
+            summary: Delete a food of the individual catalogue by its name
+            tags:
+                - Catalogue
+            operationId: catalogueFoodNameDelete
+            parameters:
+                - in: path
+                  name: name
+                  schema:
+                      $ref: '#/components/schemas/Name'
+                  required: true
+            responses:
+                '200':
+                    $ref: '#/components/responses/200'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /catalogue/food:
+        get:
+            summary: Get the food of the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueFoodGet
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Food'
+                '500':
+                    $ref: '#/components/responses/500'
+        post:
+            summary: Add a food to the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueFoodPost
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Food'
+            responses:
+                '201':
+                    description: The item was created.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '409':
+                    $ref: '#/components/responses/409'
+                '500':
+                    $ref: '#/components/responses/500'
+        put:
+            summary: Update a food in the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueFoodPut
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Food'
+            responses:
+                '200':
+                    description: The item was updated.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Food'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /catalogue/meal/{name}:
+        get:
+            summary: Get the meals information of the individual catalogue by its name
+            tags:
+                - Catalogue
+            operationId: catalogueMealNameGet
+            parameters:
+                -   in: path
+                    name: name
+                    schema:
+                        type: string
+                    required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Meal'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+        delete:
+            summary: Delete a meal of the individual catalogue by its name
+            tags:
+                - Catalogue
+            operationId: catalogueMealNameDelete
+            parameters:
+                - in: path
+                  name: name
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                '200':
+                    $ref: '#/components/responses/200'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /catalogue/meal:
+        get:
+            summary: Get the meals of the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueMealGet
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Meal'
+                '500':
+                    $ref: '#/components/responses/500'
+        post:
+            summary: Add a meal to the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueMealPost
+            requestBody:
+                required: true
+                description: The name of the meal and an array of barcodes of the food the meal contains
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MealSubmission'
+            responses:
+                '201':
+                    description: The item was created.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Meal'
+                '409':
+                    $ref: '#/components/responses/409'
+                '500':
+                    $ref: '#/components/responses/500'
+        put:
+            summary: Update a meal to the individual catalogue
+            tags:
+                - Catalogue
+            operationId: catalogueMealPut
+            requestBody:
+                required: true
+                description: The name of the meal and an array of barcodes of the food the meal contains
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MealSubmission'
+            responses:
+                '200':
+                    description: The item was updated.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Meal'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /diary/{day}:
+        get:
+            summary: Get a diary entry containing every food and all meals assigned to the day
+            tags:
+                - Diary
+            operationId: diaryDayGet
+            parameters:
+                -   in: path
+                    name: day
+                    schema:
+                        $ref: '#/components/schemas/Day'
+                    required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '500':
+                    $ref: '#/components/responses/500'
+    /diary/food/{day}:
+        post:
+            summary: Add food to the diary entry for the specified day
+            tags:
+                - Diary
+            operationId: diaryFoodDayPost
+            parameters:
+                -   in: path
+                    name: day
+                    schema:
+                        $ref: '#/components/schemas/Day'
+                    required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryFoodEntrySubmission'
+            responses:
+                '201':
+                    description: The item was created. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '409':
+                    $ref: '#/components/responses/409'
+                '500':
+                    $ref: '#/components/responses/500'
+        put:
+            summary: Update a food of the diary entry of a specified day
+            tags:
+                - Diary
+            operationId: diaryFoodDayPut
+            parameters:
+                - in: path
+                  name: day
+                  schema:
+                      $ref: '#/components/schemas/Day'
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryFoodEntrySubmission'
+            responses:
+                '200':
+                    description: The item was updated. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+        delete:
+            summary: Delete a food of the diary entry of a specified day
+            tags:
+                - Diary
+            operationId: diaryFoodDayDelete
+            parameters:
+                - in: path
+                  name: day
+                  schema:
+                      $ref: '#/components/schemas/Day'
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryFoodEntryDeleteSubmission'
+            responses:
+                '200':
+                    description: The item was deleted. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+    /diary/meal/{day}:
+        post:
+            summary: Add a meal to the diary entry for the specified day
+            tags:
+                - Diary
+            operationId: diaryMealDayPost
+            parameters:
+                -   in: path
+                    name: day
+                    schema:
+                        $ref: '#/components/schemas/Day'
+                    required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryMealEntrySubmission'
+            responses:
+                '201':
+                    description: The request was successful. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '409':
+                    $ref: '#/components/responses/409'
+                '500':
+                    $ref: '#/components/responses/500'
+        put:
+            summary: Update a meal of the diary entry for a specified day
+            tags:
+                - Diary
+            operationId: diaryMealDayPut
+            parameters:
+                - in: path
+                  name: day
+                  schema:
+                      $ref: '#/components/schemas/Day'
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryMealEntrySubmission'
+            responses:
+                '200':
+                    description: The item was updated. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+        delete:
+            summary: Delete a meal of the diary entry for a specified day
+            tags:
+                - Diary
+            operationId: diaryMealDayDelete
+            parameters:
+                - in: path
+                  name: day
+                  schema:
+                      $ref: '#/components/schemas/Day'
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DiaryMealEntryDeleteSubmission'
+            responses:
+                '200':
+                    description: The item was deleted. Returns the diary entry for this day.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DiaryEntry'
+                '404':
+                    $ref: '#/components/responses/404'
+                '500':
+                    $ref: '#/components/responses/500'
+
+components:
+    responses:
+        '200':
+            description: The request was successful.
+        '201':
+            description: The item was created.
+        '404':
+            description: The item was not found.
+        '409':
+            description: The item already exists.
+        '500':
+            description: An internal problem occured.
+    schemas:
+        DiaryMealEntryDeleteSubmission:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                name:
+                    $ref: '#/components/schemas/Name'
+            required:
+                - dateTime
+                - name
+        DiaryMealEntrySubmission:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                name:
+                    $ref: '#/components/schemas/Name'
+                portion:
+                    $ref: '#/components/schemas/Portion'
+            required:
+                - dateTime
+                - name
+                - portion
+        DiaryFoodEntryDeleteSubmission:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                name:
+                    $ref: '#/components/schemas/Name'
+            required:
+                - dateTime
+                - name
+        DiaryFoodEntrySubmission:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                name:
+                    $ref: '#/components/schemas/Name'
+                gram:
+                    $ref: '#/components/schemas/Gram'
+            required:
+                - dateTime
+                - name
+                - gram
+        MealSubmission:
+            type: object
+            properties:
+                name:
+                    $ref: '#/components/schemas/Name'
+                ingredients:
+                    type: array
+                    items:
+                        type: object
+                        title: MealSubmissionIngredient
+                        properties:
+                            name:
+                                $ref: '#/components/schemas/Name'
+                            gram:
+                                $ref: '#/components/schemas/Gram'
+                        required:
+                            - name
+                            - gram
+            required:
+                - name
+                - ingredients
+        ExternalFoodSubmission:
+            type: object
+            properties:
+                barcode:
+                    $ref: '#/components/schemas/Barcode'
+                name:
+                    $ref: '#/components/schemas/Name'
+            required:
+                - barcode
+                - name
+        DiaryEntry:
+            type: object
+            description: One Entry of the diary containing every food and all meals assigned to this day.
+            properties:
+                assignedDay:
+                    $ref: '#/components/schemas/Day'
+                meals:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/DiaryMealEntry'
+                food:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/DiaryFoodEntry'
+            required:
+                - assignedDay
+                - meals
+                - food
+        DiaryMealEntry:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                portion:
+                    $ref: '#/components/schemas/Portion'
+                meal:
+                    $ref: '#/components/schemas/Meal'
+            required:
+                - dateTime
+                - portion
+                - meal
+        DiaryFoodEntry:
+            type: object
+            properties:
+                dateTime:
+                    $ref: '#/components/schemas/DateTime'
+                gram:
+                    $ref: '#/components/schemas/Gram'
+                food:
+                    $ref: '#/components/schemas/Food'
+            required:
+                - dateTime
+                - gram
+                - food
+        Meal:
+            type: object
+            properties:
+                name:
+                    $ref: '#/components/schemas/Name'
+                ingredients:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Ingredient'
+            required:
+                - name
+                - ingredients
+        Ingredient:
+            type: object
+            properties:
+                gram:
+                    $ref: '#/components/schemas/Gram'
+                food:
+                    $ref: '#/components/schemas/Food'
+            required:
+                - gram
+                - food
+        Food:
+            type: object
+            required:
+                - name
+                - nutriments
+            properties:
+                name:
+                    $ref: '#/components/schemas/Name'
+                brands:
+                    type: string
+                nutriments:
+                    $ref: '#/components/schemas/Nutriments'
+        Nutriments:
+            type: object
+            required:
+                - calories
+                - carbohydrates
+                - proteins
+                - fat
+                - fiber
+            properties:
+                calories:
+                    type: integer
+                carbohydrates:
+                    type: number
+                    format: float
+                proteins:
+                    type: number
+                    format: float
+                fat:
+                    type: number
+                    format: float
+                fiber:
+                    type: number
+                    format: float
+        Portion:
+            type: number
+            format: float
+        Gram:
+            type: integer
+        Barcode:
+            type: integer
+            format: int64
+            description: The barcode of a food article
+        Name:
+            type: string
+            description: The name of the object
+        DateTime:
+            type: string
+            format: 'date-time'
+            description: A simple date-time representation
+        Day:
+            type: string
+            format: date
+            description: A simple date representation
+

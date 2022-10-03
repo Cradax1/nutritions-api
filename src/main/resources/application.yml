@@ -1,0 +1,24 @@
+spring:
+    application:
+        name: nutritionApi
+    jpa:
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop
+    datasource:
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: defaultuser
+        password: mysecretpassword
+        driverClassName: org.postgresql.Driver
+
+food-information-provider:
+    base-url: https://world.openfoodfacts.org
+    endpoints:
+        nutrition-facts: api/v2/product
+
+keycloak:
+    auth-server-url: http://localhost:8081
+    realm: nutritionApi
+    resource: nutrition_client

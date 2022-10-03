@@ -1,0 +1,1438 @@
+{
+  "code": "4337256112260",
+  "product": {
+    "_id": "4337256112260",
+    "_keywords": [
+      "plant-based",
+      "müsli",
+      "bio",
+      "product",
+      "beeren",
+      "cereal",
+      "breakfast",
+      "and",
+      "grade",
+      "fruit",
+      "beverage",
+      "sugar",
+      "rewe",
+      "their",
+      "no",
+      "food",
+      "nutriscore",
+      "added",
+      "potatoe",
+      "muesli",
+      "with"
+    ],
+    "added_countries_tags": [],
+    "additives_n": 1,
+    "additives_old_n": 1,
+    "additives_old_tags": [
+      "en:e322"
+    ],
+    "additives_original_tags": [
+      "en:e322"
+    ],
+    "additives_tags": [
+      "en:e322"
+    ],
+    "allergens": "",
+    "allergens_from_ingredients": "en:gluten, Hafervollkornflocken¹",
+    "allergens_from_user": "(en) ",
+    "allergens_hierarchy": [
+      "en:gluten"
+    ],
+    "allergens_lc": "en",
+    "allergens_tags": [
+      "en:gluten"
+    ],
+    "amino_acids_tags": [],
+    "brands": "Rewe,Rewe Bio",
+    "brands_tags": [
+      "rewe",
+      "rewe-bio"
+    ],
+    "categories": "Plant-based foods and beverages,Plant-based foods,Breakfasts,Cereals and potatoes,Cereals and their products,Breakfast cereals,Mueslis,Cereals with fruits",
+    "categories_hierarchy": [
+      "en:plant-based-foods-and-beverages",
+      "en:plant-based-foods",
+      "en:breakfasts",
+      "en:cereals-and-potatoes",
+      "en:cereals-and-their-products",
+      "en:breakfast-cereals",
+      "en:mueslis",
+      "en:cereals-with-fruits"
+    ],
+    "categories_lc": "en",
+    "categories_properties": {
+      "agribalyse_proxy_food_code:en": "32128",
+      "ciqual_food_code:en": "32004"
+    },
+    "categories_properties_tags": [
+      "all-products",
+      "categories-known",
+      "agribalyse-food-code-unknown",
+      "agribalyse-proxy-food-code-32128",
+      "agribalyse-proxy-food-code-known",
+      "ciqual-food-code-32004",
+      "ciqual-food-code-known",
+      "agribalyse-known",
+      "agribalyse-32128"
+    ],
+    "categories_tags": [
+      "en:plant-based-foods-and-beverages",
+      "en:plant-based-foods",
+      "en:breakfasts",
+      "en:cereals-and-potatoes",
+      "en:cereals-and-their-products",
+      "en:breakfast-cereals",
+      "en:mueslis",
+      "en:cereals-with-fruits"
+    ],
+    "checkers_tags": [],
+    "cities_tags": [],
+    "code": "4337256112260",
+    "codes_tags": [
+      "code-13",
+      "4337256112xxx",
+      "433725611xxxx",
+      "43372561xxxxx",
+      "4337256xxxxxx",
+      "433725xxxxxxx",
+      "43372xxxxxxxx",
+      "4337xxxxxxxxx",
+      "433xxxxxxxxxx",
+      "43xxxxxxxxxxx",
+      "4xxxxxxxxxxxx"
+    ],
+    "compared_to_category": "en:cereals-with-fruits",
+    "complete": 0,
+    "completeness": 0.5875,
+    "correctors_tags": [
+      "futzi1909",
+      "moon-rabbit"
+    ],
+    "countries": "Germany",
+    "countries_hierarchy": [
+      "en:germany"
+    ],
+    "countries_lc": "en",
+    "countries_tags": [
+      "en:germany"
+    ],
+    "created_t": 1649497694,
+    "creator": "kiliweb",
+    "data_quality_bugs_tags": [],
+    "data_quality_errors_tags": [],
+    "data_quality_info_tags": [
+      "en:no-packaging-data",
+      "en:ecoscore-extended-data-not-computed",
+      "en:food-groups-1-known",
+      "en:food-groups-2-known",
+      "en:food-groups-3-unknown"
+    ],
+    "data_quality_tags": [
+      "en:no-packaging-data",
+      "en:ecoscore-extended-data-not-computed",
+      "en:food-groups-1-known",
+      "en:food-groups-2-known",
+      "en:food-groups-3-unknown",
+      "en:ingredients-percent-analysis-not-ok",
+      "en:nutrition-value-under-0-1-g-salt",
+      "en:ecoscore-origins-of-ingredients-origins-are-100-percent-unknown",
+      "en:ecoscore-packaging-packaging-data-missing",
+      "en:ecoscore-production-system-no-label"
+    ],
+    "data_quality_warnings_tags": [
+      "en:ingredients-percent-analysis-not-ok",
+      "en:nutrition-value-under-0-1-g-salt",
+      "en:ecoscore-origins-of-ingredients-origins-are-100-percent-unknown",
+      "en:ecoscore-packaging-packaging-data-missing",
+      "en:ecoscore-production-system-no-label"
+    ],
+    "data_sources": "App - Yuka, Apps, App - smoothie-openfoodfacts",
+    "data_sources_tags": [
+      "app-yuka",
+      "apps",
+      "app-smoothie-openfoodfacts"
+    ],
+    "debug_param_sorted_langs": [
+      "de"
+    ],
+    "ecoscore_data": {
+      "adjustments": {
+        "origins_of_ingredients": {
+          "aggregated_origins": [
+            {
+              "origin": "en:unknown",
+              "percent": 100
+            }
+          ],
+          "epi_score": 0,
+          "epi_value": -5,
+          "origins_from_origins_field": [
+            "en:unknown"
+          ],
+          "transportation_scores": {
+            "ad": 0,
+            "al": 0,
+            "at": 0,
+            "ax": 0,
+            "ba": 0,
+            "be": 0,
+            "bg": 0,
+            "ch": 0,
+            "cy": 0,
+            "cz": 0,
+            "de": 0,
+            "dk": 0,
+            "dz": 0,
+            "ee": 0,
+            "eg": 0,
+            "es": 0,
+            "fi": 0,
+            "fo": 0,
+            "fr": 0,
+            "gg": 0,
+            "gi": 0,
+            "gr": 0,
+            "hr": 0,
+            "hu": 0,
+            "ie": 0,
+            "il": 0,
+            "im": 0,
+            "is": 0,
+            "it": 0,
+            "je": 0,
+            "lb": 0,
+            "li": 0,
+            "lt": 0,
+            "lu": 0,
+            "lv": 0,
+            "ly": 0,
+            "ma": 0,
+            "mc": 0,
+            "md": 0,
+            "me": 0,
+            "mk": 0,
+            "mt": 0,
+            "nl": 0,
+            "no": 0,
+            "pl": 0,
+            "ps": 0,
+            "pt": 0,
+            "ro": 0,
+            "rs": 0,
+            "se": 0,
+            "si": 0,
+            "sj": 0,
+            "sk": 0,
+            "sm": 0,
+            "sy": 0,
+            "tn": 0,
+            "tr": 0,
+            "ua": 0,
+            "uk": 0,
+            "us": 0,
+            "va": 0,
+            "world": 0,
+            "xk": 0
+          },
+          "transportation_values": {
+            "ad": 0,
+            "al": 0,
+            "at": 0,
+            "ax": 0,
+            "ba": 0,
+            "be": 0,
+            "bg": 0,
+            "ch": 0,
+            "cy": 0,
+            "cz": 0,
+            "de": 0,
+            "dk": 0,
+            "dz": 0,
+            "ee": 0,
+            "eg": 0,
+            "es": 0,
+            "fi": 0,
+            "fo": 0,
+            "fr": 0,
+            "gg": 0,
+            "gi": 0,
+            "gr": 0,
+            "hr": 0,
+            "hu": 0,
+            "ie": 0,
+            "il": 0,
+            "im": 0,
+            "is": 0,
+            "it": 0,
+            "je": 0,
+            "lb": 0,
+            "li": 0,
+            "lt": 0,
+            "lu": 0,
+            "lv": 0,
+            "ly": 0,
+            "ma": 0,
+            "mc": 0,
+            "md": 0,
+            "me": 0,
+            "mk": 0,
+            "mt": 0,
+            "nl": 0,
+            "no": 0,
+            "pl": 0,
+            "ps": 0,
+            "pt": 0,
+            "ro": 0,
+            "rs": 0,
+            "se": 0,
+            "si": 0,
+            "sj": 0,
+            "sk": 0,
+            "sm": 0,
+            "sy": 0,
+            "tn": 0,
+            "tr": 0,
+            "ua": 0,
+            "uk": 0,
+            "us": 0,
+            "va": 0,
+            "world": 0,
+            "xk": 0
+          },
+          "values": {
+            "ad": -5,
+            "al": -5,
+            "at": -5,
+            "ax": -5,
+            "ba": -5,
+            "be": -5,
+            "bg": -5,
+            "ch": -5,
+            "cy": -5,
+            "cz": -5,
+            "de": -5,
+            "dk": -5,
+            "dz": -5,
+            "ee": -5,
+            "eg": -5,
+            "es": -5,
+            "fi": -5,
+            "fo": -5,
+            "fr": -5,
+            "gg": -5,
+            "gi": -5,
+            "gr": -5,
+            "hr": -5,
+            "hu": -5,
+            "ie": -5,
+            "il": -5,
+            "im": -5,
+            "is": -5,
+            "it": -5,
+            "je": -5,
+            "lb": -5,
+            "li": -5,
+            "lt": -5,
+            "lu": -5,
+            "lv": -5,
+            "ly": -5,
+            "ma": -5,
+            "mc": -5,
+            "md": -5,
+            "me": -5,
+            "mk": -5,
+            "mt": -5,
+            "nl": -5,
+            "no": -5,
+            "pl": -5,
+            "ps": -5,
+            "pt": -5,
+            "ro": -5,
+            "rs": -5,
+            "se": -5,
+            "si": -5,
+            "sj": -5,
+            "sk": -5,
+            "sm": -5,
+            "sy": -5,
+            "tn": -5,
+            "tr": -5,
+            "ua": -5,
+            "uk": -5,
+            "us": -5,
+            "va": -5,
+            "world": -5,
+            "xk": -5
+          },
+          "warning": "origins_are_100_percent_unknown"
+        },
+        "packaging": {
+          "non_recyclable_and_non_biodegradable_materials": 1,
+          "value": -15,
+          "warning": "packaging_data_missing"
+        },
+        "production_system": {
+          "labels": [],
+          "value": 0,
+          "warning": "no_label"
+        },
+        "threatened_species": {}
+      },
+      "agribalyse": {
+        "agribalyse_proxy_food_code": "32128",
+        "co2_agriculture": 1.3050112,
+        "co2_consumption": 0,
+        "co2_distribution": 0.029120657,
+        "co2_packaging": 0.10861353,
+        "co2_processing": 0.28322975,
+        "co2_total": 1.8802469,
+        "co2_transportation": 0.15404873,
+        "code": "32128",
+        "dqr": "3.72",
+        "ef_agriculture": 0.10252854,
+        "ef_consumption": 0,
+        "ef_distribution": 0.0098990521,
+        "ef_packaging": 0.016463185,
+        "ef_processing": 0.049607778,
+        "ef_total": 0.19159438,
+        "ef_transportation": 0.013082192,
+        "is_beverage": 0,
+        "name_en": "Muesli, flakes (Bircher-style)",
+        "name_fr": "Muesli floconneux ou de type traditionnel",
+        "score": 90
+      },
+      "grade": "b",
+      "grades": {
+        "ad": "b",
+        "al": "b",
+        "at": "b",
+        "ax": "b",
+        "ba": "b",
+        "be": "b",
+        "bg": "b",
+        "ch": "b",
+        "cy": "b",
+        "cz": "b",
+        "de": "b",
+        "dk": "b",
+        "dz": "b",
+        "ee": "b",
+        "eg": "b",
+        "es": "b",
+        "fi": "b",
+        "fo": "b",
+        "fr": "b",
+        "gg": "b",
+        "gi": "b",
+        "gr": "b",
+        "hr": "b",
+        "hu": "b",
+        "ie": "b",
+        "il": "b",
+        "im": "b",
+        "is": "b",
+        "it": "b",
+        "je": "b",
+        "lb": "b",
+        "li": "b",
+        "lt": "b",
+        "lu": "b",
+        "lv": "b",
+        "ly": "b",
+        "ma": "b",
+        "mc": "b",
+        "md": "b",
+        "me": "b",
+        "mk": "b",
+        "mt": "b",
+        "nl": "b",
+        "no": "b",
+        "pl": "b",
+        "ps": "b",
+        "pt": "b",
+        "ro": "b",
+        "rs": "b",
+        "se": "b",
+        "si": "b",
+        "sj": "b",
+        "sk": "b",
+        "sm": "b",
+        "sy": "b",
+        "tn": "b",
+        "tr": "b",
+        "ua": "b",
+        "uk": "b",
+        "us": "b",
+        "va": "b",
+        "world": "b",
+        "xk": "b"
+      },
+      "missing": {
+        "labels": 1,
+        "origins": 1,
+        "packagings": 1
+      },
+      "missing_data_warning": 1,
+      "missing_key_data": 1,
+      "score": 70,
+      "scores": {
+        "ad": 70,
+        "al": 70,
+        "at": 70,
+        "ax": 70,
+        "ba": 70,
+        "be": 70,
+        "bg": 70,
+        "ch": 70,
+        "cy": 70,
+        "cz": 70,
+        "de": 70,
+        "dk": 70,
+        "dz": 70,
+        "ee": 70,
+        "eg": 70,
+        "es": 70,
+        "fi": 70,
+        "fo": 70,
+        "fr": 70,
+        "gg": 70,
+        "gi": 70,
+        "gr": 70,
+        "hr": 70,
+        "hu": 70,
+        "ie": 70,
+        "il": 70,
+        "im": 70,
+        "is": 70,
+        "it": 70,
+        "je": 70,
+        "lb": 70,
+        "li": 70,
+        "lt": 70,
+        "lu": 70,
+        "lv": 70,
+        "ly": 70,
+        "ma": 70,
+        "mc": 70,
+        "md": 70,
+        "me": 70,
+        "mk": 70,
+        "mt": 70,
+        "nl": 70,
+        "no": 70,
+        "pl": 70,
+        "ps": 70,
+        "pt": 70,
+        "ro": 70,
+        "rs": 70,
+        "se": 70,
+        "si": 70,
+        "sj": 70,
+        "sk": 70,
+        "sm": 70,
+        "sy": 70,
+        "tn": 70,
+        "tr": 70,
+        "ua": 70,
+        "uk": 70,
+        "us": 70,
+        "va": 70,
+        "world": 70,
+        "xk": 70
+      },
+      "status": "known"
+    },
+    "ecoscore_grade": "b",
+    "ecoscore_score": 70,
+    "ecoscore_tags": [
+      "b"
+    ],
+    "editors_tags": [
+      "yuka.sY2b0xO6T85zoF3NwEKvlnZNaobinQKZByLimVG1xtyMBMLPQu9J4tjzMqg",
+      "worldtest",
+      "roboto-app",
+      "moon-rabbit",
+      "futzi1909",
+      "foodvisor",
+      "kiliweb",
+      "ieathealthy"
+    ],
+    "emb_codes": "",
+    "emb_codes_tags": [],
+    "entry_dates_tags": [
+      "2022-04-09",
+      "2022-04",
+      "2022"
+    ],
+    "expiration_date": "",
+    "food_groups": "en:breakfast-cereals",
+    "food_groups_tags": [
+      "en:cereals-and-potatoes",
+      "en:breakfast-cereals"
+    ],
+    "generic_name": "",
+    "generic_name_de": "",
+    "id": "4337256112260",
+    "image_front_small_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.200.jpg",
+    "image_front_thumb_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.100.jpg",
+    "image_front_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.400.jpg",
+    "image_ingredients_small_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.200.jpg",
+    "image_ingredients_thumb_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.100.jpg",
+    "image_ingredients_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.400.jpg",
+    "image_nutrition_small_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.200.jpg",
+    "image_nutrition_thumb_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.100.jpg",
+    "image_nutrition_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.400.jpg",
+    "image_small_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.200.jpg",
+    "image_thumb_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.100.jpg",
+    "image_url": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.400.jpg",
+    "images": {
+      "1": {
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 55
+          },
+          "400": {
+            "h": 400,
+            "w": 219
+          },
+          "full": {
+            "h": 1200,
+            "w": 658
+          }
+        },
+        "uploaded_t": 1649497696,
+        "uploader": "kiliweb"
+      },
+      "2": {
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 83
+          },
+          "400": {
+            "h": 400,
+            "w": 332
+          },
+          "full": {
+            "h": 526,
+            "w": 436
+          }
+        },
+        "uploaded_t": 1649497697,
+        "uploader": "kiliweb"
+      },
+      "3": {
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 83
+          },
+          "400": {
+            "h": 400,
+            "w": 333
+          },
+          "full": {
+            "h": 600,
+            "w": 500
+          }
+        },
+        "uploaded_t": 1651035487,
+        "uploader": "foodvisor"
+      },
+      "4": {
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 75
+          },
+          "400": {
+            "h": 400,
+            "w": 300
+          },
+          "full": {
+            "h": 4032,
+            "w": 3024
+          }
+        },
+        "uploaded_t": 1651329645,
+        "uploader": "futzi1909"
+      },
+      "front_de": {
+        "angle": 0,
+        "coordinates_image_size": "full",
+        "geometry": "0x0--1--1",
+        "imgid": "1",
+        "normalize": null,
+        "rev": "3",
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 55
+          },
+          "200": {
+            "h": 200,
+            "w": 110
+          },
+          "400": {
+            "h": 400,
+            "w": 219
+          },
+          "full": {
+            "h": 1200,
+            "w": 658
+          }
+        },
+        "white_magic": null,
+        "x1": "-1",
+        "x2": "-1",
+        "y1": "-1",
+        "y2": "-1"
+      },
+      "ingredients_de": {
+        "angle": "0",
+        "coordinates_image_size": "full",
+        "geometry": "1397x1985-774-1346",
+        "imgid": "4",
+        "normalize": "false",
+        "rev": "14",
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 70
+          },
+          "200": {
+            "h": 200,
+            "w": 141
+          },
+          "400": {
+            "h": 400,
+            "w": 282
+          },
+          "full": {
+            "h": 1985,
+            "w": 1397
+          }
+        },
+        "white_magic": "false",
+        "x1": "774.5575221238938",
+        "x2": "2171.2300884955753",
+        "y1": "1346.1371681415928",
+        "y2": "3331.5530973451328"
+      },
+      "nutrition_de": {
+        "angle": 0,
+        "coordinates_image_size": "full",
+        "geometry": "0x0--1--1",
+        "imgid": "2",
+        "normalize": null,
+        "rev": "5",
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 83
+          },
+          "200": {
+            "h": 200,
+            "w": 166
+          },
+          "400": {
+            "h": 400,
+            "w": 332
+          },
+          "full": {
+            "h": 526,
+            "w": 436
+          }
+        },
+        "white_magic": null,
+        "x1": "-1",
+        "x2": "-1",
+        "y1": "-1",
+        "y2": "-1"
+      }
+    },
+    "informers_tags": [
+      "yuka.sY2b0xO6T85zoF3NwEKvlnZNaobinQKZByLimVG1xtyMBMLPQu9J4tjzMqg",
+      "kiliweb",
+      "roboto-app",
+      "worldtest",
+      "futzi1909",
+      "moon-rabbit",
+      "ieathealthy"
+    ],
+    "ingredients": [
+      {
+        "id": "en:whole-grain-oat-flakes",
+        "percent": 30,
+        "percent_estimate": 30,
+        "text": "Hafervollkornflocken¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "de:sultaninen",
+        "ingredients": [
+          {
+            "id": "de:sultaninen",
+            "percent_estimate": 10.25,
+            "text": "Sultaninen¹"
+          },
+          {
+            "from_palm_oil": "no",
+            "id": "en:sunflower-oil",
+            "percent_estimate": 10.25,
+            "text": "Sonnenblumenöl¹",
+            "vegan": "yes",
+            "vegetarian": "yes"
+          }
+        ],
+        "percent": 20.5,
+        "percent_estimate": 20.5,
+        "text": "Sultaninen¹"
+      },
+      {
+        "id": "de:weizenvollkorn",
+        "percent_estimate": 24.75,
+        "text": "Weizenvollkorn"
+      },
+      {
+        "id": "de:flocken",
+        "percent": 15,
+        "percent_estimate": 15,
+        "text": "flocken¹"
+      },
+      {
+        "id": "en:wholemeal-rye",
+        "percent_estimate": 4.875,
+        "text": "Roggenvollkorn",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "de:flocken",
+        "percent": 15,
+        "percent_estimate": 4.875,
+        "text": "flocken¹"
+      },
+      {
+        "id": "en:corn-flakes",
+        "ingredients": [
+          {
+            "id": "en:corn",
+            "percent_estimate": 0,
+            "text": "Mais¹",
+            "vegan": "yes",
+            "vegetarian": "yes"
+          },
+          {
+            "id": "en:anti-caking-agent",
+            "ingredients": [
+              {
+                "id": "en:e322",
+                "percent_estimate": 0,
+                "text": "Lecithine¹",
+                "vegan": "maybe",
+                "vegetarian": "maybe"
+              }
+            ],
+            "percent_estimate": 0,
+            "text": "Trennmittel"
+          }
+        ],
+        "percent_estimate": 0,
+        "text": "Cornflakes¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:buckwheat",
+        "percent_estimate": 0,
+        "processing": "de:geschält",
+        "text": "Buchweizen¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:sunflower-seed",
+        "percent_estimate": 0,
+        "text": "Sonnenblumenkerne¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:wheat",
+        "percent_estimate": 0,
+        "processing": "en:puffed",
+        "text": "Weizen¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:redcurrant",
+        "percent": 1.4,
+        "percent_estimate": 0,
+        "processing": "en:freeze-dried",
+        "text": "rote Johannisbeeren¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:freeze-dried-strawberries",
+        "percent": 1,
+        "percent_estimate": 0,
+        "text": "Erdbeeren¹ gefriergetrocknet",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:blackberry",
+        "percent": 0.6,
+        "percent_estimate": 0,
+        "processing": "en:freeze-dried",
+        "text": "Brombeeren¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:blueberry",
+        "percent": 0.25,
+        "percent_estimate": 0,
+        "processing": "en:freeze-dried",
+        "text": "Heidelbeeren¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:raspberry",
+        "percent": 0.25,
+        "percent_estimate": 0,
+        "processing": "en:freeze-dried",
+        "text": "Himbeeren¹",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "de:milcherzeugnissen",
+        "percent_estimate": 0,
+        "text": "Milcherzeugnissen"
+      },
+      {
+        "id": "en:nut",
+        "percent_estimate": 0,
+        "text": "Schalenfrüchten",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      },
+      {
+        "id": "en:sesame",
+        "percent_estimate": 0,
+        "text": "Sesam enthalten",
+        "vegan": "yes",
+        "vegetarian": "yes"
+      }
+    ],
+    "ingredients_analysis": {
+      "en:palm-oil-content-unknown": [
+        "de:sultaninen",
+        "de:sultaninen",
+        "de:weizenvollkorn",
+        "de:flocken",
+        "de:flocken",
+        "de:milcherzeugnissen"
+      ],
+      "en:vegan-status-unknown": [
+        "de:sultaninen",
+        "de:sultaninen",
+        "de:weizenvollkorn",
+        "de:flocken",
+        "de:flocken",
+        "de:milcherzeugnissen"
+      ],
+      "en:vegetarian-status-unknown": [
+        "de:sultaninen",
+        "de:sultaninen",
+        "de:weizenvollkorn",
+        "de:flocken",
+        "de:flocken",
+        "de:milcherzeugnissen"
+      ]
+    },
+    "ingredients_analysis_tags": [
+      "en:palm-oil-content-unknown",
+      "en:vegan-status-unknown",
+      "en:vegetarian-status-unknown"
+    ],
+    "ingredients_from_or_that_may_be_from_palm_oil_n": 0,
+    "ingredients_from_palm_oil_n": 0,
+    "ingredients_from_palm_oil_tags": [],
+    "ingredients_hierarchy": [
+      "en:whole-grain-oat-flakes",
+      "en:cereal",
+      "en:oat",
+      "en:oat-flakes",
+      "de:sultaninen",
+      "de:weizenvollkorn",
+      "de:flocken",
+      "en:wholemeal-rye",
+      "en:rye",
+      "en:corn-flakes",
+      "en:corn",
+      "en:buckwheat",
+      "en:sunflower-seed",
+      "en:plant",
+      "en:seed",
+      "en:sunflower",
+      "en:wheat",
+      "en:redcurrant",
+      "en:fruit",
+      "en:berries",
+      "en:freeze-dried-strawberries",
+      "en:strawberry",
+      "en:blackberry",
+      "en:blueberry",
+      "en:raspberry",
+      "de:milcherzeugnissen",
+      "en:nut",
+      "en:sesame",
+      "en:sunflower-oil",
+      "en:oil-and-fat",
+      "en:vegetable-oil-and-fat",
+      "en:vegetable-oil",
+      "en:anti-caking-agent",
+      "en:e322"
+    ],
+    "ingredients_n": 23,
+    "ingredients_n_tags": [
+      "23",
+      "21-30"
+    ],
+    "ingredients_original_tags": [
+      "en:whole-grain-oat-flakes",
+      "de:sultaninen",
+      "de:weizenvollkorn",
+      "de:flocken",
+      "en:wholemeal-rye",
+      "de:flocken",
+      "en:corn-flakes",
+      "en:buckwheat",
+      "en:sunflower-seed",
+      "en:wheat",
+      "en:redcurrant",
+      "en:freeze-dried-strawberries",
+      "en:blackberry",
+      "en:blueberry",
+      "en:raspberry",
+      "de:milcherzeugnissen",
+      "en:nut",
+      "en:sesame",
+      "de:sultaninen",
+      "en:sunflower-oil",
+      "en:corn",
+      "en:anti-caking-agent",
+      "en:e322"
+    ],
+    "ingredients_percent_analysis": -1,
+    "ingredients_tags": [
+      "en:whole-grain-oat-flakes",
+      "en:cereal",
+      "en:oat",
+      "en:oat-flakes",
+      "de:sultaninen",
+      "de:weizenvollkorn",
+      "de:flocken",
+      "en:wholemeal-rye",
+      "en:rye",
+      "en:corn-flakes",
+      "en:corn",
+      "en:buckwheat",
+      "en:sunflower-seed",
+      "en:plant",
+      "en:seed",
+      "en:sunflower",
+      "en:wheat",
+      "en:redcurrant",
+      "en:fruit",
+      "en:berries",
+      "en:freeze-dried-strawberries",
+      "en:strawberry",
+      "en:blackberry",
+      "en:blueberry",
+      "en:raspberry",
+      "de:milcherzeugnissen",
+      "en:nut",
+      "en:sesame",
+      "en:sunflower-oil",
+      "en:oil-and-fat",
+      "en:vegetable-oil-and-fat",
+      "en:vegetable-oil",
+      "en:anti-caking-agent",
+      "en:e322"
+    ],
+    "ingredients_text": "Hafervollkornflocken¹ 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn - flocken¹ 15%, Roggenvollkorn - flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von Lupinen, Soja, Milcherzeugnissen, Schalenfrüchten und Sesam enthalten.",
+    "ingredients_text_de": "Hafervollkornflocken¹ 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn - flocken¹ 15%, Roggenvollkorn - flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von Lupinen, Soja, Milcherzeugnissen, Schalenfrüchten und Sesam enthalten.",
+    "ingredients_text_de_ocr_1655585710": "Hafervollkornflocken¹ 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn- flocken¹ 15%, Roggenvollkorn- flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von Lupinen, Soja, Milcherzeugnissen, Schalenfrüchten und Sesam enthalten.",
+    "ingredients_text_de_ocr_1655585710_result": "Hafervollkornflocken¹ 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn - flocken¹ 15%, Roggenvollkorn - flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von Lupinen, Soja, Milcherzeugnissen, Schalenfrüchten und Sesam enthalten.",
+    "ingredients_text_with_allergens": "<span class=\"allergen\">Hafervollkornflocken¹</span> 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn - flocken¹ 15%, Roggenvollkorn - flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von <span class=\"allergen\">Lupinen</span>, <span class=\"allergen\">Soja</span>, Milcherzeugnissen, <span class=\"allergen\">Schalenfrüchten</span> und <span class=\"allergen\">Sesam</span> enthalten.",
+    "ingredients_text_with_allergens_de": "<span class=\"allergen\">Hafervollkornflocken¹</span> 30%, Sultaninen¹ 20,5% (Sultaninen¹, Sonnenblumenöl¹), Weizenvollkorn - flocken¹ 15%, Roggenvollkorn - flocken¹ 15%, Cornflakes¹ (Mais¹, Trennmittel (Lecithine¹)), Buchweizen¹ geschält, Sonnenblumenkerne¹, Weizen¹ gepufft, rote Johannisbeeren¹ gefriergetrocknet 1,4%, Erdbeeren¹ gefriergetrocknet 1%, Brombeeren¹ gefriergetrocknet 0,6%, Heidelbeeren¹ gefriergetrocknet 0,25%, Himbeeren¹ gefriergetrocknet 0,25%. ¹aus ökologischem Landbau Kann Spuren von <span class=\"allergen\">Lupinen</span>, <span class=\"allergen\">Soja</span>, Milcherzeugnissen, <span class=\"allergen\">Schalenfrüchten</span> und <span class=\"allergen\">Sesam</span> enthalten.",
+    "ingredients_that_may_be_from_palm_oil_n": 0,
+    "ingredients_that_may_be_from_palm_oil_tags": [],
+    "ingredients_with_specified_percent_n": 8,
+    "ingredients_with_specified_percent_sum": 63.5,
+    "ingredients_with_unspecified_percent_n": 12,
+    "ingredients_with_unspecified_percent_sum": 50.125,
+    "interface_version_created": "20150316.jqm2",
+    "interface_version_modified": "20150316.jqm2",
+    "known_ingredients_n": 30,
+    "labels": "No added sugar,Nutriscore,Nutriscore Grade A",
+    "labels_hierarchy": [
+      "en:no-added-sugar",
+      "en:nutriscore",
+      "en:nutriscore-grade-a"
+    ],
+    "labels_lc": "en",
+    "labels_tags": [
+      "en:no-added-sugar",
+      "en:nutriscore",
+      "en:nutriscore-grade-a"
+    ],
+    "lang": "de",
+    "languages": {
+      "en:german": 5
+    },
+    "languages_codes": {
+      "de": 5
+    },
+    "languages_hierarchy": [
+      "en:german"
+    ],
+    "languages_tags": [
+      "en:german",
+      "en:1"
+    ],
+    "last_edit_dates_tags": [
+      "2022-07-28",
+      "2022-07",
+      "2022"
+    ],
+    "last_editor": "ieathealthy",
+    "last_image_dates_tags": [
+      "2022-04-30",
+      "2022-04",
+      "2022"
+    ],
+    "last_image_t": 1651329646,
+    "last_modified_by": "ieathealthy",
+    "last_modified_t": 1659018160,
+    "lc": "de",
+    "link": "",
+    "main_countries_tags": [],
+    "manufacturing_places": "",
+    "manufacturing_places_tags": [],
+    "max_imgid": "4",
+    "minerals_tags": [],
+    "misc_tags": [
+      "en:nutrition-fruits-vegetables-nuts-estimate-from-ingredients",
+      "en:nutrition-all-nutriscore-values-known",
+      "en:nutriscore-computed",
+      "en:ecoscore-extended-data-not-computed",
+      "en:ecoscore-missing-data-warning",
+      "en:ecoscore-missing-data-labels",
+      "en:ecoscore-missing-data-origins",
+      "en:ecoscore-missing-data-packagings",
+      "en:ecoscore-missing-data-no-packagings",
+      "en:ecoscore-computed",
+      "en:main-countries-new-product"
+    ],
+    "no_nutrition_data": "",
+    "nova_group": 4,
+    "nova_group_debug": "",
+    "nova_groups": "4",
+    "nova_groups_markers": {
+      "3": [
+        [
+          "ingredients",
+          "en:anti-caking-agent"
+        ],
+        [
+          "ingredients",
+          "en:vegetable-oil"
+        ]
+      ],
+      "4": [
+        [
+          "additives",
+          "en:e322"
+        ]
+      ]
+    },
+    "nova_groups_tags": [
+      "en:4-ultra-processed-food-and-drink-products"
+    ],
+    "nucleotides_tags": [],
+    "nutrient_levels": {
+      "fat": "moderate",
+      "salt": "low",
+      "saturated-fat": "low",
+      "sugars": "high"
+    },
+    "nutrient_levels_tags": [
+      "en:fat-in-moderate-quantity",
+      "en:saturated-fat-in-low-quantity",
+      "en:sugars-in-high-quantity",
+      "en:salt-in-low-quantity"
+    ],
+    "nutriments": {
+      "carbohydrates": 62,
+      "carbohydrates_100g": 62,
+      "carbohydrates_unit": "g",
+      "carbohydrates_value": 62,
+      "energy": 1481,
+      "energy-kcal": 354,
+      "energy-kcal_100g": 354,
+      "energy-kcal_unit": "kcal",
+      "energy-kcal_value": 354,
+      "energy-kj": 1481,
+      "energy-kj_100g": 1481,
+      "energy-kj_unit": "kj",
+      "energy-kj_value": 1481,
+      "energy_100g": 1481,
+      "energy_unit": "kj",
+      "energy_value": 1481,
+      "fat": 5,
+      "fat_100g": 5,
+      "fat_unit": "g",
+      "fat_value": 5,
+      "fiber": 10.6,
+      "fiber_100g": 10.6,
+      "fiber_unit": "g",
+      "fiber_value": 10.6,
+      "fruits-vegetables-nuts-estimate-from-ingredients_100g": 3.5,
+      "fruits-vegetables-nuts-estimate-from-ingredients_serving": 3.5,
+      "nova-group": 4,
+      "nova-group_100g": 4,
+      "nova-group_serving": 4,
+      "nutrition-score-fr": -3,
+      "nutrition-score-fr_100g": -3,
+      "proteins": 10,
+      "proteins_100g": 10,
+      "proteins_unit": "g",
+      "proteins_value": 10,
+      "salt": 0.01,
+      "salt_100g": 0.01,
+      "salt_unit": "g",
+      "salt_value": 0.01,
+      "saturated-fat": 1,
+      "saturated-fat_100g": 1,
+      "saturated-fat_unit": "g",
+      "saturated-fat_value": 1,
+      "sodium": 0.004,
+      "sodium_100g": 0.004,
+      "sodium_unit": "g",
+      "sodium_value": 0.004,
+      "sugars": 16,
+      "sugars_100g": 16,
+      "sugars_unit": "g",
+      "sugars_value": 16
+    },
+    "nutriscore_data": {
+      "energy": 1481,
+      "energy_points": 4,
+      "energy_value": 1481,
+      "fiber": 10.6,
+      "fiber_points": 5,
+      "fiber_value": 10.6,
+      "fruits_vegetables_nuts_colza_walnut_olive_oils": 3.5,
+      "fruits_vegetables_nuts_colza_walnut_olive_oils_points": 0,
+      "fruits_vegetables_nuts_colza_walnut_olive_oils_value": 3.5,
+      "grade": "a",
+      "is_beverage": 0,
+      "is_cheese": 0,
+      "is_fat": 0,
+      "is_water": 0,
+      "negative_points": 7,
+      "positive_points": 10,
+      "proteins": 10,
+      "proteins_points": 5,
+      "proteins_value": 10,
+      "saturated_fat": 1,
+      "saturated_fat_points": 0,
+      "saturated_fat_ratio": 20,
+      "saturated_fat_ratio_points": 2,
+      "saturated_fat_ratio_value": 20,
+      "saturated_fat_value": 1,
+      "score": -3,
+      "sodium": 4,
+      "sodium_points": 0,
+      "sodium_value": 4,
+      "sugars": 16,
+      "sugars_points": 3,
+      "sugars_value": 16
+    },
+    "nutriscore_grade": "a",
+    "nutriscore_score": -3,
+    "nutriscore_score_opposite": 3,
+    "nutrition_data": "on",
+    "nutrition_data_per": "100g",
+    "nutrition_data_prepared": "",
+    "nutrition_data_prepared_per": "100g",
+    "nutrition_grade_fr": "a",
+    "nutrition_grades": "a",
+    "nutrition_grades_tags": [
+      "a"
+    ],
+    "nutrition_score_beverage": 0,
+    "nutrition_score_debug": "",
+    "nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients": 1,
+    "nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value": 3.5,
+    "obsolete": "",
+    "obsolete_since_date": "",
+    "origin": "",
+    "origin_de": "",
+    "origins": "",
+    "origins_hierarchy": [],
+    "origins_lc": "en",
+    "origins_tags": [],
+    "other_nutritional_substances_tags": [],
+    "packaging": "",
+    "packaging_hierarchy": [],
+    "packaging_lc": "en",
+    "packaging_tags": [],
+    "packaging_text": "",
+    "packaging_text_de": "",
+    "packagings": [],
+    "photographers_tags": [
+      "kiliweb",
+      "foodvisor",
+      "futzi1909"
+    ],
+    "pnns_groups_1": "Cereals and potatoes",
+    "pnns_groups_1_tags": [
+      "cereals-and-potatoes",
+      "known"
+    ],
+    "pnns_groups_2": "Breakfast cereals",
+    "pnns_groups_2_tags": [
+      "breakfast-cereals",
+      "known"
+    ],
+    "popularity_key": 10,
+    "product_name": "Beeren Müsli",
+    "product_name_de": "Beeren Müsli",
+    "purchase_places": "",
+    "purchase_places_tags": [],
+    "quantity": "",
+    "removed_countries_tags": [],
+    "rev": 16,
+    "selected_images": {
+      "front": {
+        "display": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.400.jpg"
+        },
+        "small": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.200.jpg"
+        },
+        "thumb": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/front_de.3.100.jpg"
+        }
+      },
+      "ingredients": {
+        "display": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.400.jpg"
+        },
+        "small": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.200.jpg"
+        },
+        "thumb": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/ingredients_de.14.100.jpg"
+        }
+      },
+      "nutrition": {
+        "display": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.400.jpg"
+        },
+        "small": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.200.jpg"
+        },
+        "thumb": {
+          "de": "https://images.openfoodfacts.org/images/products/433/725/611/2260/nutrition_de.5.100.jpg"
+        }
+      }
+    },
+    "states": "en:to-be-completed, en:nutrition-facts-completed, en:ingredients-completed, en:expiration-date-to-be-completed, en:packaging-code-to-be-completed, en:characteristics-to-be-completed, en:origins-to-be-completed, en:categories-completed, en:brands-completed, en:packaging-to-be-completed, en:quantity-to-be-completed, en:product-name-completed, en:photos-to-be-validated, en:packaging-photo-to-be-selected, en:nutrition-photo-selected, en:ingredients-photo-selected, en:front-photo-selected, en:photos-uploaded",
+    "states_hierarchy": [
+      "en:to-be-completed",
+      "en:nutrition-facts-completed",
+      "en:ingredients-completed",
+      "en:expiration-date-to-be-completed",
+      "en:packaging-code-to-be-completed",
+      "en:characteristics-to-be-completed",
+      "en:origins-to-be-completed",
+      "en:categories-completed",
+      "en:brands-completed",
+      "en:packaging-to-be-completed",
+      "en:quantity-to-be-completed",
+      "en:product-name-completed",
+      "en:photos-to-be-validated",
+      "en:packaging-photo-to-be-selected",
+      "en:nutrition-photo-selected",
+      "en:ingredients-photo-selected",
+      "en:front-photo-selected",
+      "en:photos-uploaded"
+    ],
+    "states_tags": [
+      "en:to-be-completed",
+      "en:nutrition-facts-completed",
+      "en:ingredients-completed",
+      "en:expiration-date-to-be-completed",
+      "en:packaging-code-to-be-completed",
+      "en:characteristics-to-be-completed",
+      "en:origins-to-be-completed",
+      "en:categories-completed",
+      "en:brands-completed",
+      "en:packaging-to-be-completed",
+      "en:quantity-to-be-completed",
+      "en:product-name-completed",
+      "en:photos-to-be-validated",
+      "en:packaging-photo-to-be-selected",
+      "en:nutrition-photo-selected",
+      "en:ingredients-photo-selected",
+      "en:front-photo-selected",
+      "en:photos-uploaded"
+    ],
+    "stores": "REWE",
+    "stores_tags": [
+      "rewe"
+    ],
+    "teams": "pain-au-chocolat",
+    "teams_tags": [
+      "pain-au-chocolat"
+    ],
+    "traces": "",
+    "traces_from_ingredients": "Lupinen, Soja, Schalenfrüchten, Sesam",
+    "traces_from_user": "(en) ",
+    "traces_hierarchy": [
+      "en:lupin",
+      "en:nuts",
+      "en:sesame-seeds",
+      "en:soybeans"
+    ],
+    "traces_lc": "en",
+    "traces_tags": [
+      "en:lupin",
+      "en:nuts",
+      "en:sesame-seeds",
+      "en:soybeans"
+    ],
+    "unknown_ingredients_n": 4,
+    "unknown_nutrients_tags": [],
+    "vitamins_tags": []
+  },
+  "status": 1,
+  "status_verbose": "product found"
+}
