@@ -24,3 +24,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B test --file pom.xml
+    - name: JIB container build and publish
+      uses: MathieuSoysal/jib-container-publish.yml@v2.1.3
+      with:
+        PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        java-version: 17
