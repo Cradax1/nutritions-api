@@ -6,7 +6,6 @@ info:
 
 servers:
     -   url: http://localhost:8080
-        description: Optional server description
 
 tags:
     - name: Food
