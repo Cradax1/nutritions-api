@@ -4,6 +4,8 @@ import com.mdaul.nutrition.nutritionapi.api.model.ExternalFoodSubmission;
 import com.mdaul.nutrition.nutritionapi.api.model.Food;
 import com.mdaul.nutrition.nutritionapi.client.FoodInformationProviderClient;
 import com.mdaul.nutrition.nutritionapi.exception.DatabaseEntryAlreadyExistingException;
+import com.mdaul.nutrition.nutritionapi.exception.ExternalFoodAlreadyMappedToUserException;
+import com.mdaul.nutrition.nutritionapi.exception.FoodWithNameAlreadyExistsException;
 import com.mdaul.nutrition.nutritionapi.model.database.CatalogueExternalFood;
 import com.mdaul.nutrition.nutritionapi.model.database.CatalogueInternalFood;
 import com.mdaul.nutrition.nutritionapi.model.database.CatalogueUserFood;
@@ -94,13 +96,13 @@ public class CatalogueFoodService {
             String message = String.format(
                     "Database entry for name %s and userId %s already exists",
                     externalFoodSubmission.getName(), userId);
-            throw new DatabaseEntryAlreadyExistingException(message);
+            throw new FoodWithNameAlreadyExistsException(message);
         }
         if (catalogueExternalFoodAlreadyMappedToUser(externalFoodSubmission.getBarcode(), userId)) {
             String message = String.format(
                     "Database entry for barcode %d and userId %s already exists",
                     externalFoodSubmission.getBarcode(), userId);
-            throw new DatabaseEntryAlreadyExistingException(message);
+            throw new ExternalFoodAlreadyMappedToUserException(message);
         }
         Optional<InformationProviderResult> providerResult =
                 providerClient.getFoodInformation(externalFoodSubmission.getBarcode());
@@ -188,5 +190,12 @@ public class CatalogueFoodService {
             return Optional.empty();
         }
         return Optional.of(foodBuilder.build(catalogueUserFood.get()));
+    }
+
+    public Optional<List<Food>> searchFood(String name, String userId) {
+        log.info("Searching for food by name like {} and userId {}", name, userId);
+        List<CatalogueUserFood> catalogueUserFood =
+                catalogueUserFoodRepository.findByUserIdAndNameIgnoreCaseContainingAndActive(userId, name, true);
+        return Optional.of(catalogueUserFood.stream().map(foodBuilder::build).toList());
     }
 }

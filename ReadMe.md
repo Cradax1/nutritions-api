@@ -1,5 +1,7 @@
 # Nutrition-Api
 
+**_IMPORTANT:_** The repo is currently extended from a pure REST API to a website! Keycloak is currently disabled!
+
 A REST API to store and get food, meals and a food diary. 
 This API is also connected to the external provider https://world.openfoodfacts.org/ to retrieve food information by barcodes.
 

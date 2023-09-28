@@ -7,7 +7,6 @@ import com.mdaul.nutrition.nutritionapi.exception.FoodInformationProviderItemExc
 import com.mdaul.nutrition.nutritionapi.exception.FoodInformationProviderNotReachableException;
 import com.mdaul.nutrition.nutritionapi.exception.FoodInformationProviderStatusException;
 import com.mdaul.nutrition.nutritionapi.model.foodinformationprovider.InformationProviderResult;
-import lombok.Cleanup;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +19,10 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class FoodInformationProviderClient {

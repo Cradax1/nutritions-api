@@ -17,7 +17,6 @@
 
         <!-- dependencies -->
         <spring-boot-dependencies.version>2.7.3</spring-boot-dependencies.version>
-        <keycloak-dependencies.version>15.0.2</keycloak-dependencies.version>
         <postgresql.version>42.5.0</postgresql.version>
         <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
         <swagger-annotations.version>2.2.2</swagger-annotations.version>
@@ -27,7 +26,6 @@
         <!-- test dependencies -->
         <mockserver-client.version>5.14.0</mockserver-client.version>
         <testcontainers.version>1.17.3</testcontainers.version>
-        <testcontainers-keycloak.version>2.3.0</testcontainers-keycloak.version>
 
         <!-- plugins -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -45,13 +43,6 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>org.keycloak.bom</groupId>
-                <artifactId>keycloak-adapter-bom</artifactId>
-                <version>${keycloak-dependencies.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -65,16 +56,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -117,11 +104,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
@@ -141,12 +123,6 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>mockserver</artifactId>
             <version>${testcontainers.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.dasniko</groupId>
-            <artifactId>testcontainers-keycloak</artifactId>
-            <version>${testcontainers-keycloak.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

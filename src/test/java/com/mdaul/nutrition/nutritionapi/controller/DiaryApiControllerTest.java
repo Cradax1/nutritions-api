@@ -62,9 +62,7 @@ class DiaryApiControllerTest extends TestBase {
         diaryFoodDayPostTest_return201(dayDiaryFood, inputDiaryFood, resultDiaryFoodEntry);
         diaryMealDayPostTest_return201(dayDiaryMeal, inputDiaryMeal, resultDiaryEntry);
 
-        mockMvc.perform(MockMvcRequestBuilders.get(TestEndpointProperties.getGetDiaryByDay(resultDiaryDay))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(MockMvcRequestBuilders.get(TestEndpointProperties.getGetDiaryByDay(resultDiaryDay)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(resultDiaryEntry));
     }
@@ -73,26 +71,9 @@ class DiaryApiControllerTest extends TestBase {
     void diaryDayGetTest_return200_emptyDay() throws Exception {
         String diaryDayEmpty = requestObjects.getDiaryEntryEmptyAsString(DUMMY_LOCAL_DATE);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetDiaryByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetDiaryByDay(DUMMY_LOCAL_DATE)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(diaryDayEmpty));
-    }
-
-    @Test
-    void diaryDayGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetDiaryByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryDayGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetDiaryByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -108,8 +89,6 @@ class DiaryApiControllerTest extends TestBase {
 
     private void diaryFoodDayPostTest_return201(LocalDate day, String input, String result) throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(day))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isCreated())
@@ -119,8 +98,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryFoodDayPostTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -131,8 +108,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionMissingAttributeGramAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -143,26 +118,9 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionNullAttributeGramAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void diaryFoodDayPostTest_return401() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryFoodDayPostTest_return403() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -170,8 +128,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -188,8 +144,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryFoodDayPostTest_return201(dayDiaryFood, inputDiaryFood, resultDiaryEntry);
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(dayDiaryFood))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryFood))
                 .andExpect(status().isConflict());
@@ -200,8 +154,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
@@ -220,8 +172,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryFoodDayPostTest_return201(dayDiaryFood, inputDiaryFood, resultDiaryEntry);
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(dayDiaryFood))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryFoodUpdated))
                 .andExpect(status().isOk())
@@ -231,8 +181,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryFoodDayPutTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -243,8 +191,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionMissingAttributeGramAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -255,26 +201,9 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionNullAttributeGramAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void diaryFoodDayPutTest_return401() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryFoodDayPutTest_return403() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -282,8 +211,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -294,8 +221,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntrySubmissionAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
@@ -314,8 +239,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryFoodDayPostTest_return201(dayDiaryFood, inputDiaryFood, resultDiaryEntryFood);
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(dayDiaryFood))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryFoodDelete))
                 .andExpect(status().isOk())
@@ -325,8 +248,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryFoodDayDeleteTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -337,8 +258,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntryDeleteSubmissionMissingAttributeNameAsString();
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -349,34 +268,15 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryFoodEntryDeleteSubmissionNullAttributeNameAsString();
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void diaryFoodDayDeleteTest_return401() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryFoodDayDeleteTest_return403() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void diaryFoodDayDeleteTest_return404() throws Exception {
         String input = requestObjects.getDiaryFoodEntryDeleteSubmissionAsString();
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryFoodByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -400,8 +300,6 @@ class DiaryApiControllerTest extends TestBase {
 
     void diaryMealDayPostTest_return201(LocalDate day, String input, String result) throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(day))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isCreated())
@@ -411,8 +309,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryMealDayPostTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -423,8 +319,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionMissingAttributePortionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -435,26 +329,9 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionNullAttributePortionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void diaryMealDayPostTest_return401() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryMealDayPostTest_return403() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -462,8 +339,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -485,8 +360,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryMealDayPostTest_return201(dayDiaryMeal, inputDiaryMeal, resultDiaryEntry);
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(dayDiaryMeal))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryMeal))
                 .andExpect(status().isConflict());
@@ -497,8 +370,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
@@ -522,8 +393,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryMealDayPostTest_return201(dayDiaryMeal, inputDiaryMeal, resultDiaryEntry);
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(dayDiaryMeal))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryMealUpdated))
                 .andExpect(status().isOk())
@@ -533,8 +402,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryMealDayPutTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -545,8 +412,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionMissingAttributePortionAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -557,26 +422,9 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionNullAttributePortionAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void diaryMealDayPutTest_return401() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryMealDayPutTest_return403() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -584,8 +432,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionUpdatedAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -596,8 +442,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntrySubmissionUpdatedAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
@@ -621,8 +465,6 @@ class DiaryApiControllerTest extends TestBase {
         diaryMealDayPostTest_return201(dayDiaryMeal, inputDiaryMeal, resultDiaryEntryMeal);
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(dayDiaryMeal))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryMealDelete))
                 .andExpect(status().isOk())
@@ -632,8 +474,6 @@ class DiaryApiControllerTest extends TestBase {
     @Test
     void diaryMealDayDeleteTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -644,8 +484,6 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntryDeleteSubmissionMissingAttributeNameAsString();
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -656,26 +494,9 @@ class DiaryApiControllerTest extends TestBase {
         String input = requestObjects.getDiaryMealEntryDeleteSubmissionNullAttributeNameAsString();
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void diaryMealDayDeleteTest_return401() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void diaryMealDayDeleteTest_return403() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -683,8 +504,6 @@ class DiaryApiControllerTest extends TestBase {
         String inputDiaryMealDelete = requestObjects.getDiaryMealEntryDeleteSubmissionAsString();
 
         mockMvc.perform(delete(TestEndpointProperties.getDeleteDiaryMealByDay(DUMMY_LOCAL_DATE))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputDiaryMealDelete))
                 .andExpect(status().isNotFound());

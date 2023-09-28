@@ -13,9 +13,8 @@ import java.util.Optional;
 public interface CatalogueUserFoodRepository extends JpaRepository<CatalogueUserFood, Long> {
 
     List<CatalogueUserFood> findByUserIdAndActive(String userId, boolean active);
-
     Optional<CatalogueUserFood> findByUserIdAndNameAndActive(String userId, String name, boolean active);
-
+    List<CatalogueUserFood> findByUserIdAndNameIgnoreCaseContainingAndActive(String userId, String name, boolean active);
     Optional<CatalogueUserFood> findByCatalogueExternalFoodBarcodeAndUserIdAndActive(long barcode, String userId, boolean active);
     List<CatalogueUserFood> findByCatalogueExternalFoodBarcode(long barcode);
 

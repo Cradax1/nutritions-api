@@ -8,7 +8,6 @@ import com.mdaul.nutrition.nutritionapi.exception.FoodInformationProviderStatusE
 import com.mdaul.nutrition.nutritionapi.model.foodinformationprovider.InformationProviderResult;
 import com.mdaul.nutrition.nutritionapi.model.foodinformationprovider.Nutriments;
 import com.mdaul.nutrition.nutritionapi.model.foodinformationprovider.Product;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,6 @@
 package com.mdaul.nutrition.nutritionapi;
 
-import dasniko.testcontainers.keycloak.KeycloakContainer;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.KeycloakBuilder;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.mock.Expectation;
 import org.mockserver.model.HttpError;
@@ -27,20 +24,11 @@ import static org.mockserver.model.HttpResponse.response;
 @ActiveProfiles("test")
 public abstract class TestBase {
     private static final String DEFAULT_PASSWORD = "secretpassword";
-    private static final String KEYCLOAK_REALM = "nutritionApi";
-    private static final String KEYCLOAK_CLIENT = "nutrition_client";
-    private static final String KEYCLOAK_USER_ROLE_NONE_NAME = "user_role_none";
-    private static final String KEYCLOAK_USER_ROLE_USER_1_NAME = "user_role_user1";
     private static final String DB_NAME = "nutritiontest";
     private static final String DB_USER = "testuser";
     private static final int DB_PORT = 5432;
     private static final String mockedEndpointNameGetFoodByBarcode = "getFoodByBarcode";
     private static final String foodInformationProviderResponsePath = "foodInformationProvider/responseMocks";
-
-    static KeycloakContainer keycloak = new KeycloakContainer("quay.io/keycloak/keycloak:19.0.0")
-            .withRealmImportFile("/keycloak/realm-import.json")
-            .withAdminUsername("myKeycloakAdminUser")
-            .withAdminPassword(DEFAULT_PASSWORD);
 
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14")
             .withDatabaseName(DB_NAME)
@@ -52,30 +40,11 @@ public abstract class TestBase {
             new MockServerContainer(DockerImageName.parse("mockserver/mockserver:5.14.0"));
 
     static {
-        keycloak.start();
         postgres.start();
         foodInformationProviderMock.start();
     }
 
     private final TestUtils testUtils = new TestUtils();
-
-    public Keycloak keycloakClientUserRoleUser = KeycloakBuilder.builder()
-            .serverUrl(keycloak.getAuthServerUrl())
-            .realm(KEYCLOAK_REALM)
-            .clientId(KEYCLOAK_CLIENT)
-            .clientSecret(DEFAULT_PASSWORD)
-            .username(KEYCLOAK_USER_ROLE_USER_1_NAME)
-            .password(DEFAULT_PASSWORD)
-            .build();
-
-    public Keycloak keycloakClientUserNoRole = KeycloakBuilder.builder()
-            .serverUrl(keycloak.getAuthServerUrl())
-            .realm(KEYCLOAK_REALM)
-            .clientId(KEYCLOAK_CLIENT)
-            .clientSecret(DEFAULT_PASSWORD)
-            .username(KEYCLOAK_USER_ROLE_NONE_NAME)
-            .password(DEFAULT_PASSWORD)
-            .build();
 
     public Expectation[] item = new MockServerClient(
             foodInformationProviderMock.getHost(), foodInformationProviderMock.getServerPort())
@@ -182,13 +151,6 @@ public abstract class TestBase {
                 () -> String.format("jdbc:postgresql://localhost:%d/%s", postgres.getFirstMappedPort(), postgres.getDatabaseName()));
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
-    }
-
-    @DynamicPropertySource
-    static void setKeycloakProperties(DynamicPropertyRegistry registry) {
-        registry.add("keycloak.auth-server-url", () -> keycloak.getAuthServerUrl());
-        registry.add("keycloak.realm", () -> KEYCLOAK_REALM);
-        registry.add("keycloak.resource", () -> KEYCLOAK_CLIENT);
     }
 
     @DynamicPropertySource

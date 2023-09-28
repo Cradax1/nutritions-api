@@ -51,8 +51,6 @@ class CatalogueApiControllerTest extends TestBase {
 
     void catalogueFoodExternalPostTest_return201(String input, String result) throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isCreated())
@@ -62,8 +60,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueFoodExternalPostTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -74,8 +70,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getExternalFoodSubmission4337256112260MissingAttributeNameAsString();
 
         mockMvc.perform(MockMvcRequestBuilders.post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -86,26 +80,9 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getExternalFoodSubmission4337256112260NullAttributeNameAsString();
 
         mockMvc.perform(MockMvcRequestBuilders.post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void catalogueFoodExternalPostTest_return401() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodExternalPostTest_return403() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -113,8 +90,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getExternalFoodSubmission73223NotFoundAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -128,8 +103,6 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodExternalPostTest_return201(input, result);
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isConflict());
@@ -140,8 +113,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getExternalFoodSubmission4337256112260AsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueExternalFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
@@ -155,41 +126,20 @@ class CatalogueApiControllerTest extends TestBase {
 
         catalogueFoodExternalPostTest_return201(input, result);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(barcode))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(barcode)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(result));
     }
 
     @Test
     void catalogueFoodExternalBarcodeGetTest_return400() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(DUMMY_STRING)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void catalogueFoodExternalBarcodeGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(Long.toString(DUMMY_LONG)))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodExternalBarcodeGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(Long.toString(DUMMY_LONG)))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueFoodExternalBarcodeGetTest_return404() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(Long.toString(DUMMY_LONG)))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueExternalFoodByBarcode(Long.toString(DUMMY_LONG))))
                 .andExpect(status().isNotFound());
     }
 
@@ -210,8 +160,6 @@ class CatalogueApiControllerTest extends TestBase {
 
     void catalogueFoodPostTest_return201(String input, String result) throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isCreated())
@@ -221,8 +169,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueFoodPostTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -233,8 +179,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getFoodMissingAttributeCarbohydratesAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -245,32 +189,9 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getFoodNullAttributeCarbohydratesAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void catalogueFoodPostTest_return401() throws Exception {
-        String input = requestObjects.getFoodAsString();
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(input))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodPostTest_return403() throws Exception {
-        String input = requestObjects.getFoodAsString();
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString()))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(input))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -278,8 +199,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getFoodAsString();
         catalogueFoodPostTest_return201(input, input);
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isConflict());
@@ -288,8 +207,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueFoodPostTest_return415() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML))
                 .andExpect(status().isUnsupportedMediaType());
     }
@@ -303,35 +220,16 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodPostTest_return201(input, input);
         catalogueFoodPostTest_return201(input2, input2);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodAll()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(resultArray));
     }
 
     @Test
     void catalogueFoodGetTest_return200_emptyArray() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodAll()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
-    }
-
-    @Test
-    void catalogueFoodGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodAll())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodGetTest_return403() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getGetCatalogueFoodAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -341,33 +239,14 @@ class CatalogueApiControllerTest extends TestBase {
 
         catalogueFoodPostTest_return201(inputAndResult, inputAndResult);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(name))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(name)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(inputAndResult));
     }
 
     @Test
-    void catalogueFoodNameGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodNameGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueFoodNameGetTest_return404() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueFoodByName(DUMMY_STRING)))
                 .andExpect(status().isNotFound());
     }
 
@@ -378,32 +257,13 @@ class CatalogueApiControllerTest extends TestBase {
 
         catalogueFoodPostTest_return201(inputAndResult, inputAndResult);
 
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(name))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(name)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void catalogueFoodNameDeleteTest_return401() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodNameDeleteTest_return403() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueFoodNameDeleteTest_return404() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueFoodByName(DUMMY_STRING)))
                 .andExpect(status().isNotFound());
     }
 
@@ -415,8 +275,6 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodPostTest_return201(inputAndResult, inputAndResult);
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputAndResultUpdated))
                 .andExpect(status().isOk())
@@ -431,8 +289,6 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodExternalPostTest_return201(input, result);
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -441,8 +297,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueFoodPutTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -453,8 +307,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getFoodMissingAttributeCarbohydratesAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -465,34 +317,15 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getFoodNullAttributeCarbohydratesAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void catalogueFoodPutTest_return401() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodPutTest_return403() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueFoodPutTest_return404() throws Exception {
         String input = requestObjects.getFoodAsString();
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -502,11 +335,52 @@ class CatalogueApiControllerTest extends TestBase {
     void catalogueFoodPutTest_return415() throws Exception {
         String input = requestObjects.getFoodAsString();
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueFood())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
+    }
+
+    @Test
+    void catalogueFoodSearchNameGetTest_return200_matchBothItems() throws Exception {
+        String namePart = "se";
+        String input = requestObjects.getFoodAsString();
+        String input2 = requestObjects.getFood2AsString();
+        String result = requestObjects.getFoodArrayFoodFood2AsString();
+
+        catalogueFoodPostTest_return201(input, input);
+        catalogueFoodPostTest_return201(input2, input2);
+
+        mockMvc.perform(get(TestEndpointProperties.getSearchCatalogueFoodByName(namePart)))
+                .andExpect(status().isOk())
+                .andExpect(content().json(result));
+    }
+
+    @Test
+    void catalogueFoodSearchNameGetTest_return200_matchOneItem() throws Exception {
+        String namePart = "2";
+        String input = requestObjects.getFoodAsString();
+        String input2AndResult = requestObjects.getFood2AsString();
+
+        catalogueFoodPostTest_return201(input, input);
+        catalogueFoodPostTest_return201(input2AndResult, input2AndResult);
+
+        mockMvc.perform(get(TestEndpointProperties.getSearchCatalogueFoodByName(namePart)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[" + input2AndResult + "]"));
+    }
+
+    @Test
+    void catalogueFoodSearchNameGetTest_return200_matchNoItem() throws Exception {
+        String namePart = "x";
+        String input = requestObjects.getFoodAsString();
+        String input2 = requestObjects.getFood2AsString();
+
+        catalogueFoodPostTest_return201(input, input);
+        catalogueFoodPostTest_return201(input2, input2);
+
+        mockMvc.perform(get(TestEndpointProperties.getSearchCatalogueFoodByName(namePart)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
     }
 
     @Test
@@ -524,8 +398,6 @@ class CatalogueApiControllerTest extends TestBase {
 
     void catalogueMealPostTest_return201(String inputMeal, String resultMeal) throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputMeal))
                 .andExpect(status().isCreated())
@@ -535,8 +407,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueMealPostTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -547,8 +417,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getMealSubmissionMissingAttributeGramAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -559,26 +427,9 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getMealSubmissionNullAttributeGramAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void catalogueMealPostTest_return401() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueMealPostTest_return403() throws Exception {
-        mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -586,8 +437,6 @@ class CatalogueApiControllerTest extends TestBase {
         String inputMeal = requestObjects.getMealSubmissionAsString();
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputMeal))
                 .andExpect(status().isNotFound());
@@ -606,8 +455,6 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueMealPostTest_return201(inputMeal, resultMeal);
 
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputMeal))
                 .andExpect(status().isConflict());
@@ -616,8 +463,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueMealPostTest_return415() throws Exception {
         mockMvc.perform(post(TestEndpointProperties.getCreateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML))
                 .andExpect(status().isUnsupportedMediaType());
     }
@@ -637,35 +482,16 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueMealPostTest_return201(inputMeal, resultMeal);
         catalogueMealPostTest_return201(inputMeal2, resultMeal2);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(resultMealArray));
     }
 
     @Test
     void catalogueMealGetTest_return200_emptyArray() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
-    }
-
-    @Test
-    void catalogueMealGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueMealGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealAll())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -680,33 +506,14 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodPostTest_return201(inputAndResultFood2, inputAndResultFood2);
         catalogueMealPostTest_return201(inputMeal, resultMeal);
 
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(mealName))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(mealName)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(resultMeal));
     }
 
     @Test
-    void catalogueMealNameGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueMealNameGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueMealNameGetTest_return404() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetCatalogueMealByName(DUMMY_STRING)))
                 .andExpect(status().isNotFound());
     }
 
@@ -722,32 +529,13 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueFoodPostTest_return201(inputAndResultFood2, inputAndResultFood2);
         catalogueMealPostTest_return201(inputMeal, resultMeal);
 
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(mealName))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(mealName)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void catalogueMealNameDeleteTest_return401() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueMealNameDeleteTest_return403() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueMealNameDeleteTest_return404() throws Exception {
-        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(delete(TestEndpointProperties.getDeleteCatalogueMealByName(DUMMY_STRING)))
                 .andExpect(status().isNotFound());
     }
 
@@ -765,8 +553,6 @@ class CatalogueApiControllerTest extends TestBase {
         catalogueMealPostTest_return201(inputMeal, resultMeal);
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(inputUpdatedMeal))
                 .andExpect(status().isOk())
@@ -776,8 +562,6 @@ class CatalogueApiControllerTest extends TestBase {
     @Test
     void catalogueMealPutTest_return400_wrongFormattedContent() throws Exception {
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(DUMMY_STRING))
                 .andExpect(status().isBadRequest());
@@ -788,8 +572,6 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getMealSubmissionMissingAttributeGramAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
@@ -800,34 +582,15 @@ class CatalogueApiControllerTest extends TestBase {
         String input = requestObjects.getMealSubmissionNullAttributeGramAsString();
 
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void catalogueMealPutTest_return401() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueMealPutTest_return403() throws Exception {
-        mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueMealPutTest_return404() throws Exception {
         String input = requestObjects.getMealSubmissionAsString();
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(input))
                 .andExpect(status().isNotFound());
@@ -837,8 +600,6 @@ class CatalogueApiControllerTest extends TestBase {
     void catalogueMealPutTest_return415() throws Exception {
         String input = requestObjects.getMealSubmissionAsString();
         mockMvc.perform(put(TestEndpointProperties.getUpdateCatalogueMeal())
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString()))
                         .contentType(MediaType.APPLICATION_XML)
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());

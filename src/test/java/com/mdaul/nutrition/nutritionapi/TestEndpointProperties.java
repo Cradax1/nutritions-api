@@ -20,6 +20,7 @@ public class TestEndpointProperties {
     private static final String createCatalogueFood = "/catalogue/food";
     @Getter
     private static final String updateCatalogueFood = "/catalogue/food";
+    private static final String searchCatalogueFoodByName = "/catalogue/food/search/%s";
     // ---------- catalogue - meal ---------- //
     private static final String getCatalogueMealByName = "/catalogue/meal/%s";
     private static final String deleteCatalogueMealByName = "/catalogue/meal/%s";
@@ -56,6 +57,10 @@ public class TestEndpointProperties {
 
     public static String getDeleteCatalogueFoodByName(String name) {
         return String.format(deleteCatalogueFoodByName, name);
+    }
+
+    public static String getSearchCatalogueFoodByName(String name) {
+        return String.format(searchCatalogueFoodByName, name);
     }
 
     // ---------- catalogue - meal ---------- //

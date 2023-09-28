@@ -22,6 +22,20 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
         return new ResponseEntity<>("The item already exists", HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(FoodWithNameAlreadyExistsException.class)
+    protected ResponseEntity<String> handleFoodWithNameAlreadyExistsException(HttpServletResponse response,
+                                                                              FoodWithNameAlreadyExistsException ex) throws IOException {
+        log.debug(ex.getMessage());
+        return new ResponseEntity<>("An item with this name is already catalogued.", HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ExternalFoodAlreadyMappedToUserException.class)
+    protected ResponseEntity<String> handleExternalFoodAlreadyMappedToUserException(HttpServletResponse response,
+                                                                                    ExternalFoodAlreadyMappedToUserException ex) throws IOException {
+        log.debug(ex.getMessage());
+        return new ResponseEntity<>("An item with the given barcode is already catalogued.", HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(FoodInformationProviderStatusException.class)
     protected ResponseEntity<String> handleFoodInformationProviderStatusException(HttpServletResponse response,
                                                                 FoodInformationProviderStatusException ex) throws IOException {

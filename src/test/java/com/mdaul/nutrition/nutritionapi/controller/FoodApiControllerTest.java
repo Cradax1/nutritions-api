@@ -16,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Import(TestRepositoryUtils.class)
 class FoodApiControllerTest extends TestBase {
-    private static final long DUMMY_LONG = 3829473298432L;
     private static final String DUMMY_STRING = "a09sd8fu79as0f8ß0fd0ß9asf";
     private final TestUtils testUtils = new TestUtils();
     private final TestRequestObjectConfiguration requestObjects = new TestRequestObjectConfiguration();
@@ -33,41 +32,20 @@ class FoodApiControllerTest extends TestBase {
     @Test
     void foodBarcodeGetTest_return200() throws Exception {
         String result = requestObjects.getFoodExternal4337256112260AsString();
-        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode("4337256112260"))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode("4337256112260")))
                 .andExpect(status().isOk())
                 .andExpect(content().json(result));
     }
 
     @Test
     void catalogueFoodNameGetTest_return400() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode(DUMMY_STRING))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode(DUMMY_STRING)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void catalogueFoodNameGetTest_return401() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode(Long.toString(DUMMY_LONG)))
-                        .headers(testUtils.getTokenizedHeader(DUMMY_STRING)))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void catalogueFoodNameGetTest_return403() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode(Long.toString(DUMMY_LONG)))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserNoRole.tokenManager().getAccessTokenString())))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     void catalogueFoodNameGetTest_return404() throws Exception {
-        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode("73223"))
-                        .headers(testUtils.getTokenizedHeader(
-                                keycloakClientUserRoleUser.tokenManager().getAccessTokenString())))
+        mockMvc.perform(get(TestEndpointProperties.getGetExternalProviderFoodByBarcode("73223")))
                 .andExpect(status().isNotFound());
     }
 }

@@ -68,6 +68,11 @@ public class CatalogueApiController implements ApiController, CatalogueApi {
     }
 
     @Override
+    public ResponseEntity<List<Food>> catalogueFoodSearchNameGet(String name) {
+        return ResponseEntity.of(catalogueFoodService.searchFood(name, getUserId()));
+    }
+
+    @Override
     public ResponseEntity<Meal> catalogueMealPost(MealSubmission mealSubmission) {
         Optional<Meal> meal = catalogueMealService.saveMeal(mealSubmission, getUserId());
         return meal.map(value
