@@ -168,48 +168,6 @@ function getAddModalInputs(form) {
   return foodItem;
 }
 
-/* PROBLEM: Have to catch multiple async responses to display error in good way (and not all after another pops up)
-$("#delete-all-selected-item").click(function( event ) {
-
-  var foodNames = getSelectedItemNames();
-  var responses = [];
-
-  $.each(foodNames, function (index, item) {
-  console.log(item);
-    var responseArr = [item, deleteFood(item)];
-    responses.push(responseArr);
-  })
-
-  $.each(responses, function (index, item) {
-    console.log(item[0]);
-    console.log(item[1]);
-  })
-});
-
-function getSelectedItemNames() {
-    var foodNames = []
-    $("#food-catalogue-table-body").find("input:checkbox").each(function() {
-      if($(this).is(":checked")){
-        foodNames.push($(this).closest("tr").find(".food-name:first").text());
-      }
-    });
-    return foodNames;
-}
-
-function deleteFood(name) {
-  $.ajax({
-    url: getDeleteFoodUrl(name),
-    type: "DELETE",
-    success: function (response) {
-      return response.status;
-    },
-    error: function (response) {
-      return response.status;
-    }
-  })
-}
-*/
-
 $('#food-select-all-checkbox').click(function(e){
     var table= $(e.target).closest('table');
     $('input:checkbox',table).prop('checked',this.checked);

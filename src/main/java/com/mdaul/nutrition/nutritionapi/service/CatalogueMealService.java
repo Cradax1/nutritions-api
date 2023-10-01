@@ -24,15 +24,14 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class CatalogueMealService {
+    private final MealBuilder mealBuilder;
+    private final DataEntriesOptimizer dataEntriesOptimizer;
     @Autowired
     private CatalogueUserFoodRepository catalogueUserFoodRepository;
     @Autowired
     private CatalogueMealRepository catalogueMealRepository;
     @Autowired
     private CatalogueMealIngredientRepository catalogueMealIngredientRepository;
-
-    private final MealBuilder mealBuilder;
-    private final DataEntriesOptimizer dataEntriesOptimizer;
 
     public CatalogueMealService(MealBuilder mealBuilder, DataEntriesOptimizer dataEntriesOptimizer) {
         this.mealBuilder = mealBuilder;
@@ -57,12 +56,11 @@ public class CatalogueMealService {
     @Transactional
     public Optional<Meal> updateMeal(MealSubmission mealSubmission, String userId) {
         log.info("Updating meal with name {} to user with id {}", mealSubmission.getName(), userId);
-       Optional<CatalogueMeal> catalogueMeal =
-               catalogueMealRepository.findByUserIdAndNameAndActive(userId, mealSubmission.getName(), true);
-       if (catalogueMeal.isEmpty()) {
-           return Optional.empty();
-       }
-       setCatalogueMealInactive(catalogueMeal.get());
+        Optional<CatalogueMeal> catalogueMeal =
+                catalogueMealRepository.findByUserIdAndNameAndActive(userId, mealSubmission.getName(), true);
+        if (catalogueMeal.isEmpty()) {
+            return Optional.empty();
+        }
         List<CatalogueMealIngredient> catalogueMealIngredients =
                 getActiveCatalogueMealIngredientsWithoutMeal(userId, mealSubmission);
         if (catalogueMealIngredients.size() != mealSubmission.getIngredients().size()) {
@@ -70,7 +68,8 @@ public class CatalogueMealService {
                     catalogueMealIngredients.size(), mealSubmission.getIngredients().size(), userId);
             return Optional.empty();
         }
-       return saveMealDo(userId, mealSubmission, catalogueMealIngredients);
+        setCatalogueMealInactive(catalogueMeal.get());
+        return saveMealDo(userId, mealSubmission, catalogueMealIngredients);
     }
 
     private void setCatalogueMealInactive(CatalogueMeal catalogueMeal) {
@@ -81,7 +80,7 @@ public class CatalogueMealService {
         log.info("Saving meal with name {} to user with id {}", mealSubmission.getName(), userId);
         if (activeMealExists(userId, mealSubmission.getName())) {
             String message = String.format("Meal for user with id %s and with name %s already exists", userId,
-                mealSubmission.getName());
+                    mealSubmission.getName());
             throw new DatabaseEntryAlreadyExistingException(message);
         }
         List<CatalogueMealIngredient> catalogueMealIngredients =
@@ -117,8 +116,7 @@ public class CatalogueMealService {
                     catalogueUserFoodRepository.findByUserIdAndNameAndActive(userId, ingredientsInner.getName(), true);
             if (catalogueUserFood.isEmpty()) {
                 log.debug("User food with userId {} and name {} not found", userId, ingredientsInner.getName());
-            }
-            else {
+            } else {
                 catalogueMealIngredients.add(
                         new CatalogueMealIngredient(ingredientsInner.getGram(), catalogueUserFood.get()));
             }

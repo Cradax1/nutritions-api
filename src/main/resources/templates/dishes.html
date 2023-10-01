@@ -65,13 +65,13 @@
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Food Catalogue<span th:text="'(' + ${#lists.size(dishList)} + ')'" class="text-muted fw-normal ms-2"></span></h5>
+                <h5 class="card-title">Dish Catalogue<span th:text="'(' + ${#lists.size(dishList)} + ')'" class="text-muted fw-normal ms-2"></span></h5>
             </div>
         </div>
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                 <form class="" role="search">
-                    <input id="meal-search-input" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                    <input id="dish-search-input" type="search" class="form-control" placeholder="Search..." aria-label="Search">
                 </form>
                 <div>
                     <ul class="nav nav-pills">
@@ -126,12 +126,46 @@
                                                     <div class="modal-body p-5 pt-0">
                                                         <form class="editCatalogueItemForm" th:iteration="${iterationState.index}">
                                                             <div class="modal-header mb-3">
-                                                                <h1 class="modal-title fs-5" th:id="'editModalLabel' + ${iterationState.index}">Food Catalogue Item</h1>
+                                                                <h1 class="modal-title fs-5" th:id="'editModalLabel' + ${iterationState.index}">Dish Catalogue Item</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <div class="mb-3">
+                                                            <div class="mb-3 border-bottom pb-3">
                                                                 <label th:for="'editModalInputName' + ${iterationState.index}" class="form-label">Name</label>
-                                                                <input type="text" class="editModalInputName form-control rounded-3" th:id="'editModalInputName' + ${iterationState.index}" th:value="${dish.name}" readonly required>
+                                                                <input type="text" class="edit-modal-input-name form-control rounded-3" th:id="'editModalInputName' + ${iterationState.index}" th:value="${dish.name}" readonly required>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mb-2">
+                                                                <label class="form-label align-middle">Ingredients</label>
+                                                                <button class="edit-modal-add-ingredient-btn btn btn-primary align-top" tabindex="0"><i class="bx bx-plus"></i></button>
+                                                            </div>
+                                                            <div th:id="'edit-modal-ingredients-wrapper-' + ${iterationState.index}" class="edit-modal-ingredients-wrapper mb-3">
+                                                                <div th:each="ingredient,ingredientIterationState : ${dish.ingredients}" th:id="'edit-modal-ingredients-inner-wrapper-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" th:iteration="${iterationState.index}" th:ingredientIteration="${ingredientIterationState.index}" class="edit-modal-ingredients-inner-wrapper pb-2">
+                                                                    <div class="dropdown">
+                                                                    <input type="text" class="edit-modal-ingredient-input-name dropdown-toggle form-control w-50 d-inline me-1" data-bs-toggle="dropdown" data-bs-display="static" autocomplete="off" th:id="'edit-modal-ingredient-input-name-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" th:placeholder="${ingredient.food.name}">
+                                                                    <input type="number" step="0.01" min="0" class="edit-modal-ingredient-input-gram form-control w-25 d-inline me-1" th:id="'edit-modal-ingredient-input-gram-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" th:placeholder="${ingredient.gram}">
+                                                                    <a href="javascript:void(0);" class="delete-ingredient-modal px-2 text-danger" th:data-bs-target="'#delete-ingredient-modal-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" data-bs-placement="top" title="Delete" tabindex="-1"><i class="bx bx-trash-alt font-size-18"></i></a>
+
+                                                                    <!-- Delete Ingredient Modal -->
+                                                                    <div class="delete-ingredient-modal modal fade rounded-3 shadow" th:id="'delete-ingredient-modal-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" tabindex="-1" aria-labelledby="delete-ingredient-modal-label" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                                            <div class="modal-content rounded-3 shadow">
+                                                                                <div class="modal-body p-4 text-center">
+                                                                                    <h5 th:text="'Delete ' + ${ingredient.food.name} + ' ?'" class="mb-0"></h5>
+                                                                                </div>
+                                                                                <p th:id="'delete-ingredient-error-text-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" class="delete-ingredient-error-text text-danger text-center" hidden></p>
+                                                                                <div class="modal-footer flex-nowrap p-0">
+                                                                                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end" data-bs-dismiss="modal">No</button>
+                                                                                    <button type="button" class="delete-ingredient-modal-delete-btn btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 text-danger" th:hide="'#edit-modal-ingredients-inner-wrapper-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}" th:close="'#delete-ingredient-modal-' + ${iterationState.index} + '-' + ${ingredientIterationState.index}">Yes</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="edit-food-search-dropdown">
+                                                                        <ul class="edit-food-search-dropdown-list edit-dropdown-menu dropdown-menu dropdown-menu-start">
+                                                                        </ul>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <p th:id="'edit-dish-error-text' + ${iterationState.index}" class="edit-dish-error-text text-danger" hidden></p>
                                                             <div class="modal-footer">
@@ -234,12 +268,12 @@
                 </div>
                 <form id="food-search" class="mb-3" role="search" autocomplete="off">
                     <label for="food-search-input" class="form-label">Ingredients</label><br>
-                    <input id="food-search-input" type="search" class="form-control w-50 d-inline me-1" placeholder="Search food..." aria-label="Search">
+                    <input id="food-search-input" type="search" data-bs-toggle="dropdown" class="form-control w-50 d-inline me-1" placeholder="Search food..." aria-label="Search">
                     <input id="food-search-amount-input" type="number" step="0.01" min="0" class="form-control w-25 d-inline me-1" placeholder="Gram">
                     <!-- Add - Pops up modal -->
                     <button id="add-food-btn" class="btn btn-primary align-top" tabindex="0"><i class="bx bx-plus"></i></button>
                     <div id="food-search-dropdown" class="dropdown">
-                        <ul id="food-search-dropdown-list" class="dropdown-menu dropdown-menu-end">
+                        <ul id="food-search-dropdown-list" class="dropdown-menu dropdown-menu-start">
                         </ul>
                     </div>
                 </form>
