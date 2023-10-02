@@ -12,6 +12,7 @@ import com.mdaul.nutrition.nutritionapi.repository.CatalogueUserFoodRepository;
 import com.mdaul.nutrition.nutritionapi.repository.DiaryFoodRepository;
 import com.mdaul.nutrition.nutritionapi.repository.DiaryMealRepository;
 import com.mdaul.nutrition.nutritionapi.util.DataEntriesOptimizer;
+import com.mdaul.nutrition.nutritionapi.util.builder.DiaryBuilder;
 import com.mdaul.nutrition.nutritionapi.util.builder.DiaryEntryBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class DiaryService {
+    private final DiaryEntryBuilder diaryEntryBuilder;
+    private final DiaryBuilder diaryBuilder;
+    private final DataEntriesOptimizer dataEntriesOptimizer;
     @Autowired
     private CatalogueUserFoodRepository catalogueUserFoodRepository;
     @Autowired
@@ -35,11 +39,10 @@ public class DiaryService {
     @Autowired
     private DiaryMealRepository diaryMealRepository;
 
-    private final DiaryEntryBuilder diaryEntryBuilder;
-    private final DataEntriesOptimizer dataEntriesOptimizer;
-
-    public DiaryService(DiaryEntryBuilder diaryEntryBuilder, DataEntriesOptimizer dataEntriesOptimizer) {
+    public DiaryService(DiaryEntryBuilder diaryEntryBuilder, DiaryBuilder diaryBuilder,
+                        DataEntriesOptimizer dataEntriesOptimizer) {
         this.diaryEntryBuilder = diaryEntryBuilder;
+        this.diaryBuilder = diaryBuilder;
         this.dataEntriesOptimizer = dataEntriesOptimizer;
     }
 
@@ -72,7 +75,7 @@ public class DiaryService {
                 diaryFoodEntryDeleteSubmission.getDateTime(), userId);
         Optional<DiaryFood> diaryFood = diaryFoodRepository
                 .findByDiaryMetaDataUserIdAndDiaryMetaDataAssignedDayAndDiaryMetaDataDateTimeAndCatalogueUserFoodName(
-                userId, assignedDay, diaryFoodEntryDeleteSubmission.getDateTime(),
+                        userId, assignedDay, diaryFoodEntryDeleteSubmission.getDateTime(),
                         diaryFoodEntryDeleteSubmission.getName());
         if (diaryFood.isEmpty()) {
             log.debug("Could not find diary food entry with name {}, assignedDay {}, date-time {} and user with id {}",
@@ -117,6 +120,17 @@ public class DiaryService {
         }
         diaryMealRepository.setPortionById(diaryMealEntrySubmission.getPortion(), diaryMeal.get().getId());
         return getDiaryEntry(userId, assignedDay);
+    }
+
+    public Optional<List<DiaryEntry>> getDiary(String userId) {
+        log.info("Trying to find all diary entries of user with id {}", userId);
+        List<DiaryFood> diaryFood =
+                diaryFoodRepository.findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(userId);
+        addCatalogueUserFood(diaryFood);
+        List<DiaryMeal> diaryMeals =
+                diaryMealRepository.findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(userId);
+        addCatalogueMeal(diaryMeals);
+        return Optional.of(diaryBuilder.build(diaryFood, diaryMeals));
     }
 
     public Optional<DiaryEntry> getDiaryEntry(String userId, LocalDate assignedDay) {
@@ -164,14 +178,14 @@ public class DiaryService {
         if (diaryFood == null) {
             return Optional.empty();
         }
-            if (diaryFoodExists(diaryFood.getDiaryMetaData().getUserId(), diaryFood.getDiaryMetaData().getAssignedDay(),
-                    diaryFood.getDiaryMetaData().getDateTime(), diaryFood.getCatalogueUserFood().getName())) {
-                String message = String.format("diary food entry with name %s, assignedDay %s, date-time %s and user" +
-                                " with id %s already exists",
-                        diaryFood.getCatalogueUserFood().getName(), diaryFood.getDiaryMetaData().getAssignedDay(),
-                        diaryFood.getDiaryMetaData().getDateTime(), diaryFood.getDiaryMetaData().getUserId());
-                throw new DatabaseEntryAlreadyExistingException(message);
-            }
+        if (diaryFoodExists(diaryFood.getDiaryMetaData().getUserId(), diaryFood.getDiaryMetaData().getAssignedDay(),
+                diaryFood.getDiaryMetaData().getDateTime(), diaryFood.getCatalogueUserFood().getName())) {
+            String message = String.format("diary food entry with name %s, assignedDay %s, date-time %s and user" +
+                            " with id %s already exists",
+                    diaryFood.getCatalogueUserFood().getName(), diaryFood.getDiaryMetaData().getAssignedDay(),
+                    diaryFood.getDiaryMetaData().getDateTime(), diaryFood.getDiaryMetaData().getUserId());
+            throw new DatabaseEntryAlreadyExistingException(message);
+        }
         return saveDiaryFoodDo(userId, assignedDay, diaryFood);
     }
 
@@ -188,7 +202,7 @@ public class DiaryService {
     }
 
     private DiaryFood getActiveDiaryFood(String userId, LocalDate assignedDay,
-                                               DiaryFoodEntrySubmission diaryFoodEntrySubmission) {
+                                         DiaryFoodEntrySubmission diaryFoodEntrySubmission) {
         Optional<CatalogueUserFood> catalogueUserFood =
                 catalogueUserFoodRepository.findByUserIdAndNameAndActive(userId, diaryFoodEntrySubmission.getName(),
                         true);
@@ -205,7 +219,7 @@ public class DiaryService {
         if (diaryMealExists(userId, assignedDay, diaryMealEntrySubmission.getDateTime(),
                 diaryMealEntrySubmission.getName())) {
             String message = String.format("DiaryMeal entry with of user with id {}, with assignedDay {}, " +
-                    "with dateTime {} and with name {} already exists", userId, assignedDay,
+                            "with dateTime {} and with name {} already exists", userId, assignedDay,
                     diaryMealEntrySubmission.getDateTime(), diaryMealEntrySubmission.getName());
             throw new DatabaseEntryAlreadyExistingException(message);
         }
@@ -225,7 +239,7 @@ public class DiaryService {
     }
 
     private DiaryMeal getDiaryMealByActiveCatalogueMeal(String userId, LocalDate assignedDay,
-                                                              DiaryMealEntrySubmission diaryMealEntrySubmission) {
+                                                        DiaryMealEntrySubmission diaryMealEntrySubmission) {
         Optional<CatalogueMeal> catalogueMeal =
                 catalogueMealRepository.findByUserIdAndNameAndActive(userId, diaryMealEntrySubmission.getName(),
                         true);

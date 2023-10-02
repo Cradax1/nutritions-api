@@ -28,73 +28,168 @@ class DiaryEntryBuilderTest {
     private final CatalogueUserFood dummyCatalogueUserFoodInternal = foodBuilderTest.dummyCatalogueUserFoodInternal;
     private final CatalogueUserFood dummyCatalogueUserFoodExternal = foodBuilderTest.dummyCatalogueUserFoodExternal;
 
+    final LocalDate dummyAssignedDay = LocalDate.of(2022, 9, 23);
+    final LocalDate dummyAssignedDay2 = LocalDate.of(2022, 10, 23);
+
+    final List<DiaryFood> dummyDiaryFood = List.of(DiaryFood.builder()
+                    .id(982348928948293L)
+                    .diaryMetaData(DiaryMetaData.builder()
+                            .userId(dummyCatalogueUserFoodInternal.getUserId())
+                            .assignedDay(dummyAssignedDay)
+                            .dateTime(LocalDateTime.of(dummyAssignedDay, LocalTime.of(9, 32, 2)))
+                            .build())
+                    .catalogueUserFood(dummyCatalogueUserFoodInternal)
+                    .gram(94)
+                    .build(),
+            DiaryFood.builder()
+                    .id(1232132138293L)
+                    .diaryMetaData(DiaryMetaData.builder()
+                            .userId(dummyCatalogueUserFoodInternal.getUserId())
+                            .assignedDay(dummyAssignedDay)
+                            .dateTime(LocalDateTime.of(dummyAssignedDay.plusDays(1), LocalTime.of(2, 1, 43)))
+                            .build())
+                    .catalogueUserFood(dummyCatalogueUserFoodExternal)
+                    .gram(87)
+                    .build());
+    final List<DiaryFood> dummyDiaryFood2 = List.of(DiaryFood.builder()
+            .id(839403894930933L)
+            .diaryMetaData(DiaryMetaData.builder()
+                    .userId(dummyCatalogueUserFoodInternal.getUserId())
+                    .assignedDay(dummyAssignedDay2)
+                    .dateTime(LocalDateTime.of(dummyAssignedDay2, LocalTime.of(9, 32, 2)))
+                    .build())
+            .catalogueUserFood(dummyCatalogueUserFoodInternal)
+            .gram(108)
+            .build());
+
+    final List<DiaryMeal> dummyDiaryMeals = List.of(DiaryMeal.builder()
+                    .id(121209099033L)
+                    .diaryMetaData(DiaryMetaData.builder()
+                            .userId(dummyCatalogueUserFoodInternal.getUserId())
+                            .assignedDay(dummyAssignedDay)
+                            .dateTime(LocalDateTime.of(dummyAssignedDay, LocalTime.of(12, 15, 41)))
+                            .build())
+                    .catalogueMeal(mealBuilderTest.dummyCatalogueMeal)
+                    .portion(new BigDecimal("1.6"))
+                    .build(),
+            DiaryMeal.builder()
+                    .id(121209099033L)
+                    .diaryMetaData(DiaryMetaData.builder()
+                            .userId(dummyCatalogueUserFoodInternal.getUserId())
+                            .assignedDay(dummyAssignedDay)
+                            .dateTime(LocalDateTime.of(dummyAssignedDay.plusDays(1), LocalTime.of(0, 23, 51)))
+                            .build())
+                    .catalogueMeal(mealBuilderTest.dummyCatalogueMeal2)
+                    .portion(new BigDecimal("0.8"))
+                    .build());
+
+    final List<DiaryMeal> dummyDiaryMeals2 = List.of(DiaryMeal.builder()
+            .id(238432409244324L)
+            .diaryMetaData(DiaryMetaData.builder()
+                    .userId(dummyCatalogueUserFoodInternal.getUserId())
+                    .assignedDay(dummyAssignedDay2)
+                    .dateTime(LocalDateTime.of(dummyAssignedDay2, LocalTime.of(12, 15, 41)))
+                    .build())
+            .catalogueMeal(mealBuilderTest.dummyCatalogueMeal)
+            .portion(new BigDecimal("2.5"))
+            .build());
+
     @Test
-    void build() {
-        String userId = dummyCatalogueUserFoodInternal.getUserId();
-        LocalDate assignedDay = LocalDate.of(2022, 9, 23);
+    void build_2food_2meals() {
+        DiaryEntry diaryEntry = diaryEntryBuilder.build(dummyAssignedDay, dummyDiaryFood, dummyDiaryMeals);
 
-        List<DiaryFood> diaryFood = List.of(DiaryFood.builder()
-                        .id(982348928948293L)
-                        .diaryMetaData(DiaryMetaData.builder()
-                                .userId(userId)
-                                .assignedDay(assignedDay)
-                                .dateTime(LocalDateTime.of(assignedDay, LocalTime.of(9, 32, 2)))
-                                .build())
-                        .catalogueUserFood(dummyCatalogueUserFoodInternal)
-                        .gram(94)
-                .build(),
-                DiaryFood.builder()
-                        .id(1232132138293L)
-                        .diaryMetaData(DiaryMetaData.builder()
-                                .userId(userId)
-                                .assignedDay(assignedDay)
-                                .dateTime(LocalDateTime.of(assignedDay.plusDays(1), LocalTime.of(2, 1, 43)))
-                                .build())
-                        .catalogueUserFood(dummyCatalogueUserFoodExternal)
-                        .gram(87)
-                        .build());
+        asset_diaryEntry_isEqualTo_dummyAssignedDay_dummyDiaryFood_dummyDiaryMeals(diaryEntry);
+    }
 
-        List<DiaryMeal> diaryMeals = List.of(DiaryMeal.builder()
-                        .id(121209099033L)
-                        .diaryMetaData(DiaryMetaData.builder()
-                                .userId(userId)
-                                .assignedDay(assignedDay)
-                                .dateTime(LocalDateTime.of(assignedDay, LocalTime.of(12, 15, 41)))
-                                .build())
-                        .catalogueMeal(mealBuilderTest.dummyCatalogueMeal)
-                        .portion(new BigDecimal("1.6"))
-                .build(),
-                DiaryMeal.builder()
-                        .id(121209099033L)
-                        .diaryMetaData(DiaryMetaData.builder()
-                                .userId(userId)
-                                .assignedDay(assignedDay)
-                                .dateTime(LocalDateTime.of(assignedDay.plusDays(1), LocalTime.of(0, 23, 51)))
-                                .build())
-                        .catalogueMeal(mealBuilderTest.dummyCatalogueMeal2)
-                        .portion(new BigDecimal("0.8"))
-                        .build());
+    @Test
+    void build_1food() {
+        DiaryEntry diaryEntry = diaryEntryBuilder.build(dummyAssignedDay2, dummyDiaryFood2, List.of());
 
-        DiaryEntry diaryEntry = diaryEntryBuilder.build(assignedDay, diaryFood, diaryMeals);
+        asset_diaryEntry_isEqualTo_dummyAssignedDay2_dummyDiaryFood2(diaryEntry);
+    }
 
-        assertThat(diaryEntry.getAssignedDay()).isEqualTo(assignedDay);
+    @Test
+    void build_1meal() {
+        DiaryEntry diaryEntry = diaryEntryBuilder.build(dummyAssignedDay2, List.of(), dummyDiaryMeals2);
 
-        assertThat(diaryEntry.getFood().get(0).getGram()).isEqualTo(diaryFood.get(0).getGram());
-        assertThat(diaryEntry.getFood().get(0).getDateTime()).isEqualTo(diaryFood.get(0).getDiaryMetaData().getDateTime());
+        asset_diaryEntry_isEqualTo_dummyAssignedDay2_dummyDiaryMeals2(diaryEntry);
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay_dummyDiaryFood_dummyDiaryMeals(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay);
+
+        assertThat(diaryEntry.getFood().get(0).getGram()).isEqualTo(dummyDiaryFood.get(0).getGram());
+        assertThat(diaryEntry.getFood().get(0).getDateTime()).isEqualTo(dummyDiaryFood.get(0).getDiaryMetaData().getDateTime());
         foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodInternal(
-                diaryEntry.getFood().get(0).getFood(), diaryFood.get(0).getCatalogueUserFood());
+                diaryEntry.getFood().get(0).getFood(), dummyDiaryFood.get(0).getCatalogueUserFood());
 
-        assertThat(diaryEntry.getFood().get(1).getGram()).isEqualTo(diaryFood.get(1).getGram());
-        assertThat(diaryEntry.getFood().get(1).getDateTime()).isEqualTo(diaryFood.get(1).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getFood().get(1).getGram()).isEqualTo(dummyDiaryFood.get(1).getGram());
+        assertThat(diaryEntry.getFood().get(1).getDateTime()).isEqualTo(dummyDiaryFood.get(1).getDiaryMetaData().getDateTime());
         foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodExternal(
-                diaryEntry.getFood().get(1).getFood(), diaryFood.get(1).getCatalogueUserFood());
+                diaryEntry.getFood().get(1).getFood(), dummyDiaryFood.get(1).getCatalogueUserFood());
 
-        assertThat(diaryEntry.getMeals().get(0).getDateTime()).isEqualTo(diaryMeals.get(0).getDiaryMetaData().getDateTime());
-        assertThat(diaryEntry.getMeals().get(0).getPortion()).isEqualTo(diaryMeals.get(0).getPortion());
+        assertThat(diaryEntry.getMeals().get(0).getDateTime()).isEqualTo(dummyDiaryMeals.get(0).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(0).getPortion()).isEqualTo(dummyDiaryMeals.get(0).getPortion());
         mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal(diaryEntry.getMeals().get(0).getMeal());
 
-        assertThat(diaryEntry.getMeals().get(1).getDateTime()).isEqualTo(diaryMeals.get(1).getDiaryMetaData().getDateTime());
-        assertThat(diaryEntry.getMeals().get(1).getPortion()).isEqualTo(diaryMeals.get(1).getPortion());
+        assertThat(diaryEntry.getMeals().get(1).getDateTime()).isEqualTo(dummyDiaryMeals.get(1).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(1).getPortion()).isEqualTo(dummyDiaryMeals.get(1).getPortion());
         mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal2(diaryEntry.getMeals().get(1).getMeal());
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay_dummyDiaryFood(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay);
+
+        assertThat(diaryEntry.getFood().get(0).getGram()).isEqualTo(dummyDiaryFood.get(0).getGram());
+        assertThat(diaryEntry.getFood().get(0).getDateTime()).isEqualTo(dummyDiaryFood.get(0).getDiaryMetaData().getDateTime());
+        foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodInternal(
+                diaryEntry.getFood().get(0).getFood(), dummyDiaryFood.get(0).getCatalogueUserFood());
+
+        assertThat(diaryEntry.getFood().get(1).getGram()).isEqualTo(dummyDiaryFood.get(1).getGram());
+        assertThat(diaryEntry.getFood().get(1).getDateTime()).isEqualTo(dummyDiaryFood.get(1).getDiaryMetaData().getDateTime());
+        foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodExternal(
+                diaryEntry.getFood().get(1).getFood(), dummyDiaryFood.get(1).getCatalogueUserFood());
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay_dummyDiaryMeals(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay);
+
+        assertThat(diaryEntry.getMeals().get(0).getDateTime()).isEqualTo(dummyDiaryMeals.get(0).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(0).getPortion()).isEqualTo(dummyDiaryMeals.get(0).getPortion());
+        mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal(diaryEntry.getMeals().get(0).getMeal());
+
+        assertThat(diaryEntry.getMeals().get(1).getDateTime()).isEqualTo(dummyDiaryMeals.get(1).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(1).getPortion()).isEqualTo(dummyDiaryMeals.get(1).getPortion());
+        mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal2(diaryEntry.getMeals().get(1).getMeal());
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay2_dummyDiaryFood2_dummyDiaryMeals2(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay2);
+
+        assertThat(diaryEntry.getFood().get(0).getGram()).isEqualTo(dummyDiaryFood2.get(0).getGram());
+        assertThat(diaryEntry.getFood().get(0).getDateTime()).isEqualTo(dummyDiaryFood2.get(0).getDiaryMetaData().getDateTime());
+        foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodInternal(
+                diaryEntry.getFood().get(0).getFood(), dummyDiaryFood2.get(0).getCatalogueUserFood());
+
+        assertThat(diaryEntry.getMeals().get(0).getDateTime()).isEqualTo(dummyDiaryMeals2.get(0).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(0).getPortion()).isEqualTo(dummyDiaryMeals2.get(0).getPortion());
+        mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal(diaryEntry.getMeals().get(0).getMeal());
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay2_dummyDiaryFood2(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay2);
+
+        assertThat(diaryEntry.getFood().get(0).getGram()).isEqualTo(dummyDiaryFood2.get(0).getGram());
+        assertThat(diaryEntry.getFood().get(0).getDateTime()).isEqualTo(dummyDiaryFood2.get(0).getDiaryMetaData().getDateTime());
+        foodBuilderTest.assert_Food_isEqualTo_catalogueUserFoodInternal(
+                diaryEntry.getFood().get(0).getFood(), dummyDiaryFood2.get(0).getCatalogueUserFood());
+    }
+
+    void asset_diaryEntry_isEqualTo_dummyAssignedDay2_dummyDiaryMeals2(DiaryEntry diaryEntry) {
+        assertThat(diaryEntry.getAssignedDay()).isEqualTo(dummyAssignedDay2);
+
+        assertThat(diaryEntry.getMeals().get(0).getDateTime()).isEqualTo(dummyDiaryMeals2.get(0).getDiaryMetaData().getDateTime());
+        assertThat(diaryEntry.getMeals().get(0).getPortion()).isEqualTo(dummyDiaryMeals2.get(0).getPortion());
+        mealBuilderTest.assert_meal_isEqualTo_dummyCatalogueMeal(diaryEntry.getMeals().get(0).getMeal());
     }
 }

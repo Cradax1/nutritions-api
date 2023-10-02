@@ -340,6 +340,23 @@ paths:
                                 $ref: '#/components/schemas/DiaryEntry'
                 '500':
                     $ref: '#/components/responses/500'
+    /diary/all:
+        get:
+            summary: Get diary containing every food and all meals assigned to each day
+            tags:
+                - Diary
+            operationId: diaryListGet
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/DiaryEntry'
+                '500':
+                    $ref: '#/components/responses/500'
     /diary/food/{day}:
         post:
             summary: Add food to the diary entry for the specified day

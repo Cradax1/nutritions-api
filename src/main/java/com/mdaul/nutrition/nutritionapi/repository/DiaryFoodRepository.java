@@ -14,6 +14,8 @@ import java.util.Optional;
 @Repository
 public interface DiaryFoodRepository extends JpaRepository<DiaryFood, Long> {
 
+    List<DiaryFood> findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(String userId);
+
     List<DiaryFood> findByDiaryMetaDataUserIdAndDiaryMetaDataAssignedDay(String userId, LocalDate assignedDay);
 
     Optional<DiaryFood> findByDiaryMetaDataUserIdAndDiaryMetaDataAssignedDayAndCatalogueUserFoodName(

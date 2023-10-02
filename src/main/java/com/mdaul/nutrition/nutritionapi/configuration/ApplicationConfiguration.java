@@ -59,4 +59,9 @@ public class ApplicationConfiguration {
     public DiaryEntryBuilder diaryEntryBuilder(FoodBuilder foodBuilder, MealBuilder mealBuilder) {
         return new DiaryEntryBuilder(foodBuilder, mealBuilder);
     }
+
+    @Bean
+    public DiaryBuilder diaryBuilder(DiaryEntryBuilder diaryEntryBuilder) {
+        return new DiaryBuilder(diaryEntryBuilder);
+    }
 }

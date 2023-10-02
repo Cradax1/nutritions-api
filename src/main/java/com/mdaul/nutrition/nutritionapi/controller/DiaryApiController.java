@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +23,11 @@ public class DiaryApiController implements ApiController, DiaryApi {
     @Override
     public ResponseEntity<DiaryEntry> diaryDayGet(LocalDate assignedDay) {
         return ResponseEntity.of(diaryService.getDiaryEntry(getUserId(), assignedDay));
+    }
+
+    @Override
+    public ResponseEntity<List<DiaryEntry>> diaryListGet() {
+        return ResponseEntity.of(diaryService.getDiary(getUserId()));
     }
 
     @Override
