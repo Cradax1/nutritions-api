@@ -20,12 +20,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class FoodBuilderTest {
 
+    private static final String DUMMY_USER_ID = "809af8s90a8fd09a8sd";
     private final ApiNutrimentsBuilder apiNutrimentsBuilder = new ApiNutrimentsBuilder();
     private final DataIntegrityValidator dataIntegrityValidator = new DataIntegrityValidator();
     private final FoodBuilder foodBuilder = new FoodBuilder(apiNutrimentsBuilder, dataIntegrityValidator);
 
-    final String dummyUserId = "809af8s90a8fd09a8sd";
-    final CatalogueFood dummyCatalogueFood = CatalogueFood.builder()
+    private final CatalogueFood dummyCatalogueFood = CatalogueFood.builder()
             .brands("brand1, brand2")
             .nutriments(CatalogueNutriments.builder()
                     .calories(213)
@@ -35,7 +35,8 @@ class FoodBuilderTest {
                     .fiber(new BigDecimal(5))
                     .build())
             .build();
-    final CatalogueFood dummyCatalogueFood2 = CatalogueFood.builder()
+
+    private final CatalogueFood dummyCatalogueFood2 = CatalogueFood.builder()
             .brands("brand3, brand4")
             .nutriments(CatalogueNutriments.builder()
                     .calories(492)
@@ -45,15 +46,17 @@ class FoodBuilderTest {
                     .fiber(new BigDecimal(10))
                     .build())
             .build();
-    final CatalogueUserFood dummyCatalogueUserFoodWithoutFood = CatalogueUserFood.builder()
+
+    private final CatalogueUserFood dummyCatalogueUserFoodWithoutFood = CatalogueUserFood.builder()
             .id(2013093183131L)
-            .userId(dummyUserId)
+            .userId(DUMMY_USER_ID)
             .name("foodName")
             .active(true)
             .build();
-    final CatalogueUserFood dummyCatalogueUserFoodInternal = CatalogueUserFood.builder()
+
+    private final CatalogueUserFood dummyCatalogueUserFoodInternal = CatalogueUserFood.builder()
             .id(2013902132131L)
-            .userId(dummyUserId)
+            .userId(DUMMY_USER_ID)
             .name("foodName1")
             .active(true)
             .catalogueInternalFood(CatalogueInternalFood.builder()
@@ -61,9 +64,10 @@ class FoodBuilderTest {
                     .catalogueFood(dummyCatalogueFood)
                     .build())
             .build();
-    final CatalogueUserFood dummyCatalogueUserFoodExternal = CatalogueUserFood.builder()
+
+    private final CatalogueUserFood dummyCatalogueUserFoodExternal = CatalogueUserFood.builder()
             .id(20232313323231L)
-            .userId(dummyUserId)
+            .userId(DUMMY_USER_ID)
             .name("foodName2")
             .active(false)
             .catalogueExternalFood(CatalogueExternalFood.builder()
@@ -94,10 +98,10 @@ class FoodBuilderTest {
 
         assertThat(food.getName()).isEqualTo(providerResult.getProduct().getProductName());
         assertThat(food.getBrands()).isEqualTo(providerResult.getProduct().getBrands());
-        assert_foodNutriments_isEqualTo_providerResultNutriments(food.getNutriments(), providerResult.getProduct().getNutriments());
+        assertFoodNutrimentsIsEqualToProviderResultNutriments(food.getNutriments(), providerResult.getProduct().getNutriments());
     }
 
-    void assert_foodNutriments_isEqualTo_providerResultNutriments(com.mdaul.nutrition.nutritionapi.api.model.Nutriments foodNutriments, Nutriments providerNutriments) {
+    private void assertFoodNutrimentsIsEqualToProviderResultNutriments(com.mdaul.nutrition.nutritionapi.api.model.Nutriments foodNutriments, Nutriments providerNutriments) {
         assertThat(foodNutriments.getCalories()).isEqualTo(providerNutriments.getCalories());
         assertThat(foodNutriments.getCarbohydrates()).isEqualTo(providerNutriments.getCarbohydrates());
         assertThat(foodNutriments.getProteins()).isEqualTo(providerNutriments.getProteins());
@@ -106,12 +110,20 @@ class FoodBuilderTest {
     }
 
     @Test
-    void build_withCatalogueUserFood_containingOnlyInternalFood() {
+    void build_withCatalogueUserFoodContainingOnlyInternalFood() {
         CatalogueUserFood catalogueUserFood = dummyCatalogueUserFoodInternal;
 
         Food food = foodBuilder.build(catalogueUserFood);
 
         assert_Food_isEqualTo_catalogueUserFoodInternal(food, catalogueUserFood);
+    }
+
+    private void assert_Food_isEqualTo_catalogueUserFoodInternal(Food food, CatalogueUserFood catalogueUserFood) {
+        assertThat(food.getName()).isEqualTo(catalogueUserFood.getName());
+        assertThat(food.getBrands()).isEqualTo(
+                catalogueUserFood.getCatalogueInternalFood().getCatalogueFood().getBrands());
+        assertFoodNutrimentsIsEqualToCatalogueNutriments(
+                food.getNutriments(), catalogueUserFood.getCatalogueInternalFood().getCatalogueFood().getNutriments());
     }
 
     @Test
@@ -120,7 +132,15 @@ class FoodBuilderTest {
 
         Food food = foodBuilder.build(catalogueUserFood);
 
-        assert_Food_isEqualTo_catalogueUserFoodExternal(food, catalogueUserFood);
+        assertFoodIsEqualToCatalogueUserFoodExternal(food, catalogueUserFood);
+    }
+
+    private void assertFoodIsEqualToCatalogueUserFoodExternal(Food food, CatalogueUserFood catalogueUserFoodExternal) {
+        assertThat(food.getName()).isEqualTo(catalogueUserFoodExternal.getName());
+        assertThat(food.getBrands()).isEqualTo(
+                catalogueUserFoodExternal.getCatalogueExternalFood().getCatalogueFood().getBrands());
+        assertFoodNutrimentsIsEqualToCatalogueNutriments(
+                food.getNutriments(), catalogueUserFoodExternal.getCatalogueExternalFood().getCatalogueFood().getNutriments());
     }
 
     @Test
@@ -160,28 +180,12 @@ class FoodBuilderTest {
 
         assertThat(food.getName()).isEqualTo(catalogueInternalFood.getCatalogueUserFood().getName());
         assertThat(food.getBrands()).isEqualTo(catalogueInternalFood.getCatalogueFood().getBrands());
-        assert_foodNutriments_isEqualTo_catalogueNutriments(
+        assertFoodNutrimentsIsEqualToCatalogueNutriments(
                 food.getNutriments(), catalogueInternalFood.getCatalogueFood().getNutriments());
     }
 
-    void assert_Food_isEqualTo_catalogueUserFoodExternal(Food food, CatalogueUserFood catalogueUserFoodExternal) {
-        assertThat(food.getName()).isEqualTo(catalogueUserFoodExternal.getName());
-        assertThat(food.getBrands()).isEqualTo(
-                catalogueUserFoodExternal.getCatalogueExternalFood().getCatalogueFood().getBrands());
-        assert_foodNutriments_isEqualTo_catalogueNutriments(
-                food.getNutriments(), catalogueUserFoodExternal.getCatalogueExternalFood().getCatalogueFood().getNutriments());
-    }
-
-    void assert_Food_isEqualTo_catalogueUserFoodInternal(Food food, CatalogueUserFood catalogueUserFood) {
-        assertThat(food.getName()).isEqualTo(catalogueUserFood.getName());
-        assertThat(food.getBrands()).isEqualTo(
-                catalogueUserFood.getCatalogueInternalFood().getCatalogueFood().getBrands());
-        assert_foodNutriments_isEqualTo_catalogueNutriments(
-                food.getNutriments(), catalogueUserFood.getCatalogueInternalFood().getCatalogueFood().getNutriments());
-    }
-
-    void assert_foodNutriments_isEqualTo_catalogueNutriments(com.mdaul.nutrition.nutritionapi.api.model.Nutriments foodNutriments,
-                                                             CatalogueNutriments catalogueNutriments) {
+    private void assertFoodNutrimentsIsEqualToCatalogueNutriments(com.mdaul.nutrition.nutritionapi.api.model.Nutriments foodNutriments,
+                                                                  CatalogueNutriments catalogueNutriments) {
         assertThat(foodNutriments.getCalories()).isEqualTo(catalogueNutriments.getCalories());
         assertThat(foodNutriments.getCarbohydrates()).isEqualTo(catalogueNutriments.getCarbohydrates());
         assertThat(foodNutriments.getProteins()).isEqualTo(catalogueNutriments.getProteins());
