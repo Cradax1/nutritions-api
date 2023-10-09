@@ -102,4 +102,9 @@ public class CatalogueApiController implements ApiController, CatalogueApi {
     public ResponseEntity<Meal> catalogueMealPut(MealSubmission mealSubmission) {
         return ResponseEntity.of(catalogueMealService.updateMeal(mealSubmission, getUserId()));
     }
+
+    @Override
+    public ResponseEntity<List<Meal>> catalogueMealSearchNameGet(String name) {
+        return ResponseEntity.of(catalogueMealService.searchMeal(name, getUserId()));
+    }
 }

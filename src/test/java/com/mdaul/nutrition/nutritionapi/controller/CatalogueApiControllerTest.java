@@ -604,4 +604,32 @@ class CatalogueApiControllerTest extends TestBase {
                         .content(input))
                 .andExpect(status().isUnsupportedMediaType());
     }
+
+    @Test
+    void catalogueMealSearchNameGetTest_return200() throws Exception {
+        String namePart = "ea";
+        String inputAndResultFood = requestObjects.getFoodAsString();
+        String inputAndResultFood2 = requestObjects.getFood2AsString();
+        String inputMeal = requestObjects.getMealSubmissionAsString();
+        String resultMeal = requestObjects.getMealAsString();
+        String inputMeal2 = requestObjects.getMealSubmission2AsString();
+        String resultMeal2 = requestObjects.getMeal2AsString();
+        String resultMealArray = requestObjects.getMealArrayMealMeal2AsString();
+
+        catalogueFoodPostTest_return201(inputAndResultFood, inputAndResultFood);
+        catalogueFoodPostTest_return201(inputAndResultFood2, inputAndResultFood2);
+        catalogueMealPostTest_return201(inputMeal, resultMeal);
+        catalogueMealPostTest_return201(inputMeal2, resultMeal2);
+
+        mockMvc.perform(get(TestEndpointProperties.getSearchCatalogueMealByName(namePart)))
+                .andExpect(status().isOk())
+                .andExpect(content().json(resultMealArray));
+    }
+
+    @Test
+    void catalogueMealSearchNameGetTest_return200_emptyArray() throws Exception {
+        mockMvc.perform(get(TestEndpointProperties.getSearchCatalogueMealByName(DUMMY_STRING)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
 }

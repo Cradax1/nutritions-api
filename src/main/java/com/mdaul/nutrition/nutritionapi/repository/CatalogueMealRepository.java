@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface CatalogueMealRepository extends JpaRepository<CatalogueMeal, Long> {
 
     List<CatalogueMeal> findByUserIdAndActive(String userId, boolean active);
-
     Optional<CatalogueMeal> findByUserIdAndNameAndActive(String userId, String name, boolean active);
+    List<CatalogueMeal> findByUserIdAndNameIgnoreCaseContainingAndActive(String userId, String name, boolean active);
 
     @Modifying(clearAutomatically = true)
     @Query("update CatalogueMeal u set u.active = ?1 where u.id = ?2")

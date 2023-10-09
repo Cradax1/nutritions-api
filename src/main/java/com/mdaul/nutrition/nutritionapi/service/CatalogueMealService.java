@@ -150,4 +150,11 @@ public class CatalogueMealService {
         }
         return Optional.of(mealBuilder.build(catalogueMeal.get()));
     }
+
+    public Optional<List<Meal>> searchMeal(String name, String userId) {
+        log.info("Trying to find all meals by name like {} and with user id {}", name, userId);
+        List<CatalogueMeal> catalogueMeals =
+                catalogueMealRepository.findByUserIdAndNameIgnoreCaseContainingAndActive(userId, name, true);
+        return Optional.of(catalogueMeals.stream().map(mealBuilder::build).toList());
+    }
 }

@@ -256,6 +256,29 @@ paths:
                     $ref: '#/components/responses/404'
                 '500':
                     $ref: '#/components/responses/500'
+    /catalogue/meal/search/{name}:
+        get:
+            summary: Get meals of the individual catalogue matching the searched name
+            tags:
+                - Catalogue
+            operationId: catalogueMealSearchNameGet
+            parameters:
+                - in: path
+                  name: name
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                '200':
+                    description: The request was successful.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Meal'
+                '500':
+                    $ref: '#/components/responses/500'
     /catalogue/meal:
         get:
             summary: Get the meals of the individual catalogue
