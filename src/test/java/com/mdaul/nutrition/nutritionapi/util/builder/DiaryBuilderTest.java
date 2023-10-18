@@ -25,6 +25,8 @@ class DiaryBuilderTest {
     private static final String DUMMY_USER_ID = "809af8s90a8fd09a8sd";
     private final LocalDate dummyAssignedDay = LocalDate.of(2022, 9, 23);
     private final LocalDate dummyAssignedDay2 = LocalDate.of(2022, 10, 23);
+    //same day as one but covers testcase in which localDate is compared by poor == instead of isEqualTo()
+    private final LocalDate dummyAssignedDay3 = LocalDate.of(2022, 9, 23);
 
     private final DiaryFood dummyDiaryFood = DiaryFood.builder()
             .id(839403894930933L)
@@ -52,8 +54,8 @@ class DiaryBuilderTest {
             .id(839403894930933L)
             .diaryMetaData(DiaryMetaData.builder()
                     .userId(DUMMY_USER_ID)
-                    .assignedDay(dummyAssignedDay)
-                    .dateTime(LocalDateTime.of(dummyAssignedDay, LocalTime.of(10, 1, 58)))
+                    .assignedDay(dummyAssignedDay3)
+                    .dateTime(LocalDateTime.of(dummyAssignedDay3, LocalTime.of(10, 1, 58)))
                     .build())
             .catalogueUserFood(CatalogueUserFood.builder().name("food3").build())
             .gram(152)
@@ -85,8 +87,8 @@ class DiaryBuilderTest {
             .id(238432409244324L)
             .diaryMetaData(DiaryMetaData.builder()
                     .userId(DUMMY_USER_ID)
-                    .assignedDay(dummyAssignedDay)
-                    .dateTime(LocalDateTime.of(dummyAssignedDay, LocalTime.of(18, 10, 31)))
+                    .assignedDay(dummyAssignedDay3)
+                    .dateTime(LocalDateTime.of(dummyAssignedDay3, LocalTime.of(18, 10, 31)))
                     .build())
             .catalogueMeal(CatalogueMeal.builder().name("meal3").build())
             .portion(new BigDecimal("2.9"))
@@ -105,6 +107,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(diaryFood, List.of());
 
+        assertThat(diary).hasSize(1);
         assertEquals_DiaryEntry_DiaryFood(diary.get(0), diaryFood);
     }
 
@@ -121,6 +124,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(List.of(), diaryMeals);
 
+        assertThat(diary).hasSize(1);
         assertEquals_DiaryEntry_DiaryMeal(diary.get(0), diaryMeals);
     }
 
@@ -152,6 +156,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(diaryFood, diaryMeals);
 
+        assertThat(diary).hasSize(1);
         assertEquals_DiaryEntry_DiaryFood(diary.get(0), diaryFood);
         assertEquals_DiaryEntry_DiaryMeal(diary.get(0), diaryMeals);
     }
@@ -177,6 +182,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(diaryFood, diaryMeals);
 
+        assertThat(diary).hasSize(2);
         assertEquals_DiaryEntry_DiaryFood(diary.get(0), diaryFood);
         assertEquals_DiaryEntry_DiaryMeal(diary.get(1), diaryMeals);
     }
@@ -202,6 +208,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(diaryFood, diaryMeals);
 
+        assertThat(diary).hasSize(2);
         assertEquals_DiaryEntry_DiaryMeal(diary.get(0), diaryMeals);
         assertEquals_DiaryEntry_DiaryFood(diary.get(1), diaryFood);
     }
@@ -237,6 +244,7 @@ class DiaryBuilderTest {
 
         List<DiaryEntry> diary = diaryBuilder.build(diaryFood, diaryMeals);
 
+        assertThat(diary).hasSize(2);
         assertEquals_DiaryEntry_DiaryFood(diary.get(0), List.of(dummyDiaryFood2));
         assertEquals_DiaryEntry_DiaryMeal(diary.get(0), List.of(dummyDiaryMeal2));
         assertEquals_DiaryEntry_DiaryFood(diary.get(1), List.of(dummyDiaryFood));
@@ -248,7 +256,7 @@ class DiaryBuilderTest {
         for (DiaryFood diaryFood : diaryFoodList) {
             assertThat(diaryEntry.getAssignedDay()).isEqualTo(diaryFood.getDiaryMetaData().getAssignedDay());
         }
-        for (int i = 0; i < diaryEntry.getFood().size(); i++) {
+        for (int i = 0; i < diaryFoodList.size(); i++) {
             assertThat(diaryEntry.getFood().get(i).getDateTime())
                     .isEqualTo(diaryFoodList.get(i).getDiaryMetaData().getDateTime());
             assertThat(diaryEntry.getFood().get(i).getGram()).isEqualTo(diaryFoodList.get(i).getGram());
@@ -262,7 +270,7 @@ class DiaryBuilderTest {
         for (DiaryMeal diaryMeal : diaryMeals) {
             assertThat(diaryEntry.getAssignedDay()).isEqualTo(diaryMeal.getDiaryMetaData().getAssignedDay());
         }
-        for (int i = 0; i < diaryEntry.getMeals().size(); i++) {
+        for (int i = 0; i < diaryMeals.size(); i++) {
             assertThat(diaryEntry.getMeals().get(i).getDateTime()).isEqualTo(diaryMeals.get(i).getDiaryMetaData().getDateTime());
             assertThat(diaryEntry.getMeals().get(i).getPortion()).isEqualTo(diaryMeals.get(i).getPortion());
             assertThat(diaryEntry.getMeals().get(i).getMeal().getName()).isEqualTo(diaryMeals.get(i).getCatalogueMeal().getName());

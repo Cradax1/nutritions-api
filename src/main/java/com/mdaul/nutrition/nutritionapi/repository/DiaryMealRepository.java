@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface DiaryMealRepository extends JpaRepository<DiaryMeal, Long> {
 
-    List<DiaryMeal> findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(String userId);
+    List<DiaryMeal> findByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDayDesc(String userId);
 
     List<DiaryMeal> findByDiaryMetaDataUserIdAndDiaryMetaDataAssignedDay(String userId, LocalDate assignedDay);
 

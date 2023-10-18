@@ -125,10 +125,10 @@ public class DiaryService {
     public Optional<List<DiaryEntry>> getDiary(String userId) {
         log.info("Trying to find all diary entries of user with id {}", userId);
         List<DiaryFood> diaryFood =
-                diaryFoodRepository.findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(userId);
+                diaryFoodRepository.findByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDayDesc(userId);
         addCatalogueUserFood(diaryFood);
         List<DiaryMeal> diaryMeals =
-                diaryMealRepository.findAllByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDay(userId);
+                diaryMealRepository.findByDiaryMetaDataUserIdOrderByDiaryMetaDataAssignedDayDesc(userId);
         addCatalogueMeal(diaryMeals);
         return Optional.of(diaryBuilder.build(diaryFood, diaryMeals));
     }

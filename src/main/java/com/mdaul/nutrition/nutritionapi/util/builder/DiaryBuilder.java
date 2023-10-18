@@ -64,8 +64,8 @@ public class DiaryBuilder {
         for (DiaryFood diaryFoodEntry : diaryFood) {
             if (diaryFoodDay.isEmpty()) {
                 diaryFoodDay.add(diaryFoodEntry);
-            } else if (diaryFoodEntry.getDiaryMetaData().getAssignedDay() ==
-                    diaryFoodDay.getLast().getDiaryMetaData().getAssignedDay()) {
+            } else if (diaryFoodEntry.getDiaryMetaData().getAssignedDay().equals(
+                    diaryFoodDay.getLast().getDiaryMetaData().getAssignedDay())) {
                 diaryFoodDay.add(diaryFoodEntry);
             } else {
                 diaryFoodByDay.add(diaryFoodDay);
@@ -87,8 +87,8 @@ public class DiaryBuilder {
         for (DiaryMeal diaryMealEntry : diaryMeal) {
             if (diaryMealDay.isEmpty()) {
                 diaryMealDay.add(diaryMealEntry);
-            } else if (diaryMealEntry.getDiaryMetaData().getAssignedDay() ==
-                    diaryMealDay.getLast().getDiaryMetaData().getAssignedDay()) {
+            } else if (diaryMealEntry.getDiaryMetaData().getAssignedDay().equals(
+                    diaryMealDay.getLast().getDiaryMetaData().getAssignedDay())) {
                 diaryMealDay.add(diaryMealEntry);
             } else {
                 diaryMealByDay.add(diaryMealDay);
